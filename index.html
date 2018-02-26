@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+		<script>if(document.location.protocol == 'http:')document.location.protocol = 'https';</script>
+		<title>icebox</title>
+		<script src='./assets/ice.js'></script>
+		<script src='./assets/highlight/highlight.min.js'></script>
+		<script src='./assets/marked/marked.min.js'></script>
+		<script src='./assets/main.js' async></script>
+		<link rel="alternate" type="application/rss+xml" title="icebox" href="https://quininer.github.io/rss.xml" />
+	</head>
+	<body>
+		<style scoped>
+			#list {
+				font-size: 1.2em;
+			}
+			.title {
+				font-size: 3.6em;
+			}
+			.name .subhead {
+				font-size: 1em;
+			}
+			.it {
+				font-size: 0.5em;
+				float: right;
+			}
+		</style>
+		<header>
+			<h1><strong class='title'></strong></h1>
+			<h1><strong class='name'></strong></h1>
+			<h2><em class='subhead'></em></h2>
+		</header>
+		<main>
+			<section>
+				<ul id='list'></ul>
+			</section>
+			<article id='main'></article>
+			<section id="warning">
+				<noscript>If you can, please turn JavaScript support. :)</noscript>
+				<p>This blog uses some ES6 syntax, outdated browser may not be resolved.<p>
+				<p>You can access the <a id='archive' href='https://github.com/quininer/quininer.github.io'>URL</a> to get the same content.<p>
+			</section>
+		</main>
+		<footer>
+			<section class='it'></section>
+			<section id="disqus_thread"></section>
+			<script>
+				"use strict";
+				try{
+					$.dom('#warning').del();
+				}catch(e){
+					var postname = window.decodeURIComponent(document.location.search.substring(1));
+					if(!!postname){
+						document.getElementById('archive').href += '/blob/master/mark/'+ postname +'.md';
+					};
+				};
+			</script>
+		</footer>
+	</body>
+</html>

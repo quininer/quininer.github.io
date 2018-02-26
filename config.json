@@ -1,0 +1,16 @@
+{
+	"name": "icebox",
+	"disqus": "quininer",
+	"style": ["./assets/foghorn.css", "./assets/highlight/solarized_light.min.css"],
+	"script": [],
+	"links": [
+		[
+			{ "name": "about me", "data-href": "@aboutme", "href": "./?@aboutme" },
+			{ "name": "links", "data-href": "@links", "href": "./?@links" },
+			{ "name": "rss", "href": "./rss.xml"}
+		],
+		[
+			{ "name": "Share it? CC BY-NC-SA 4.0", "href": "http://creativecommons.org/licenses/by-nc-sa/4.0/" }
+		]
+	]
+}

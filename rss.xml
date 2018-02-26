@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <managingEditor>quininer kel</managingEditor>
+        <link>https://quininer.github.io</link>
+        <title>icebox</title>
+        <lastBuildDate>Mon, 20 Apr 2015 04:05:53 -0000</lastBuildDate>
+        <description><![CDATA[不知所云]]></description>
+        <pubDate>Mon, 20 Apr 2015 04:05:53 -0000</pubDate>
+        <generator>rssgen 1.0</generator>
+        <copyright>BY-NC-SA 4.0</copyright>
+        <language>zh</language>
+        <item><author>quininer kel</author><pubDate>Tue, 06 Oct 2015 06:49:18 -0000</pubDate><guid>https://quininer.github.io/?%E5%9F%BA%E4%BA%8EserviceWorker%E7%9A%84%E7%BC%93%E5%AD%98%E6%8A%95%E6%AF%92</guid><link>https://quininer.github.io/?%E5%9F%BA%E4%BA%8EserviceWorker%E7%9A%84%E7%BC%93%E5%AD%98%E6%8A%95%E6%AF%92</link><title>基于serviceWorker的缓存投毒</title><description><![CDATA[<h1>基于serviceWorker的缓存投毒</h1>
+<h2><em>Sat May  2 20:52:57 2015</em></h2>
+<p>前几天才察觉到 Chromium 42 已经支持 Fetch API 了，
+鉴于我早就想用 Fetch 代替 Ajax，
+所以今天把 ice.js 的<code>$.http</code>部分改用 Fetch <a href="https://github.com/quininer/quininer.github.io/commit/df932e8111e716a0813f6c3fa856d196626352a6">实现</a>了。</p>
+<p>没想到的是 Firefox 目前还是 37 版本，不支持 Fetch。所以不得不引入一个 fetch.js 做兼容。</p>
+<hr />
+<h2>以上都不是重点</h2>
+<p>和 Fetch 搭配使用的还有一个有趣的东西，<code>serviceWorker</code>。
+其实早就在某牛的<a href="http://www.web-tinker.com/article/20879.html">博客</a>中看到过，
+当时没有太深想，也因为没有实际上支持 Fetch 的浏览器，所以并没在意。</p>
+<p>因为上文的事件，想起了这东西。
+简单来说，这个API能拦截 HTTP Request，并返回预定的 Response。</p>
+<p>自然，Response 里也包括 HTTP Headers，
+所以只要简单的在 HTTP Header 里控制一下缓存时间即可，比如</p>
+<pre><code>Cache-control: max-age=99999999999999999999999999999999999999
+</code></pre>
+<p>下面是一些截图</p>
+<p><img alt="1" src="/upload/cache-tests-1.png" />
+<img alt="2" src="/upload/cache-tests-2.png" />
+<img alt="3" src="/upload/cache-tests-3.png" /></p>
+<p>POC: <a href="https://quininer.github.io/tests/cache-tests/serviceworker/index.html">cache tests</a></p>
+<p>实际上也并非所有 HTTP Header 都能使用，这里有一个<a href="https://fetch.spec.whatwg.org/#concept-header-list">禁表</a>。</p>
+<hr />
+<p>~~总之这套东西不管从哪方面来说都好方便。 :)~~</p>
+<h2>实际上</h2>
+<p>收回上一句话。
+和<a href="https://twitter.com/filedescriptor">FD</a>测试了一会，
+上面的POC看上去很美，实际上<code>serviceWorker</code>限制多多。</p>
+<p>比如</p>
+<ul>
+<li>只能拦截<strong>同源</strong>且子路径的 Requests</li>
+<li>scriptURL 必须<strong>同源</strong>，且 <a href="https://github.com/slightlyoff/ServiceWorker/issues/262">原则</a> 上必须是<strong>实际</strong>存在网络的资源</li>
+<li><code>worker.js</code> 的处理和一般 script 处理不一样，必须<strong>符合</strong>规范，否则将会静默的失败</li>
+<li><code>serviceWorker</code>只能工作在 <ruby>开发环境<rt>localhost</rt></ruby> 和 <a href="https://github.com/slightlyoff/ServiceWorker/issues/385">HTTPS</a> 下</li>
+</ul>
+<p>且不说要求 HTTPS 这样涉及协议的奇葩规定，
+要求 scriptURL 必须实际存在这一点就让利用变得几无可能。</p>
+<p>实际上使用也会变得极不方便，难以和各种完全由 JavaScript 生成的框架整合。
+也没有实际上解决安全问题。</p>
+<p>我倒是更希望 scriptURL 能允许使用 Blob，而<code>Cache</code>被加入 HTTP Header 禁表。</p>]]></description></item><item><pubDate>Tue, 21 Apr 2015 09:28:47 -0000</pubDate><link>https://quininer.github.io/?Surface</link><title>Surface</title><description><![CDATA[<h1>Surface Pro 3</h1>
+<h2><em>Mon Mar 30 17:19:12 2015</em></h2>
+<p><img alt="Surface Pro 3" src="/upload/surface.jpg" /></p>
+<p>事情是這樣的，我買了一臺 Surface Pro 3，並給它裝了 Arch Linux。</p>
+<h2>關於Windows</h2>
+<p>用了兩天 Windows 8，其實感覺還不錯，按照之前的<a href="https://twitter.com/quininers/status/555389735594496003">想法</a>，
+試圖裝上 <a href="http://gooseberrycreative.com/cmder/">Cmder</a> 和 <a href="https://msys2.github.io/">msys2</a> 來讓 Windows 上的終端也達到可用狀態。</p>
+<p><a href="https://twitter.com/quininers/status/581435255137030144">效果</a>不盡人意，</p>
+<ul>
+<li>cmder 不知是字體或是什麼問題，Vim 下字符會混亂，有點像不等寬字體，而且還有鍵捕獲不到以及亂碼的奇怪問題</li>
+<li>msys2 的包太少，完全不夠用</li>
+<li>mingw 不會用= =</li>
+<li>一開始 msys2 用 pacman 裝的 Mingw Python 找不到，需要手動把<code>/mingw64/bin</code>加入 PATH</li>
+<li>試圖安裝上 yaourt，但是依賴的依賴 yajl 編譯報錯，似乎還要做許多設置</li>
+</ul>
+<p>雖然 Windows 的觸屏體驗確實很棒，但是我早有裝 Arch Linux 的想法。所以上面的問題只是藉口。</p>
+<h2>關於Arch Linux</h2>
+<p>自從 Debian 換成 Arch Linux 之後便很喜歡。</p>
+<h3>Secure Boot</h3>
+<p>開機時<code>音量鍵上 + 開機鍵</code>進 UEFI 關掉就好了，
+雖然不關也能通過<a href="https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface#Secure_Boot">這個方法</a>來啓動，
+但是實際上安裝完成之後依然會提示錯誤。</p>
+<h3>Install</h3>
+<p>雖然 <a href="http://www.reddit.com/r/SurfaceLinux/">reddit</a> 上都說 WiFi 驅動在 3.19 內核才被合併，
+但是被 #archlinux-cn 頻道的 Feb-Chip 告知親測 Arch Linux 目前 3.18 內核的鏡像也能直接使用。
+livecd 裏的 tty 下不能使用 Type Cover 鍵盤(猜測 3.19 內核之後就可以了)，所以使用 SD卡 引導。
+和 U盤 一樣，<code>音量鍵下 + 開機鍵</code>即可。</p>
+<p>安裝過程完全參考<a href="https://wiki.archlinux.org/index.php/Beginners%27_guide">新手指南</a>，沒有碰上特殊問題。</p>
+<h3>KDE</h3>
+<p>HiDPI 依然按照 <a href="https://wiki.archlinux.org/index.php/HiDPI">wiki</a> 配置。</p>
+<p>Firefox 效果不錯，
+而<a href="https://twitter.com/quininers/status/582090512603033600">Chromium 效果糟糕</a>，<code>--force-device-scale-factor=2</code> 就像被直接放大，沒有任何優化。
+比較好的方案是手動把網頁調到 175% 的大小。</p>
+<p><a href="https://github.com/nuclearsandwich/surface3-archlinux/issues/8">電磁筆</a>和觸屏幾乎完美。可惜沒有什麼對觸屏有優化的應用。
+這一點 Chromium 做的比 Firefox 好。
+配置一下可以讓電磁筆的<a href="https://github.com/nuclearsandwich/surface3-archlinux/issues/4#issuecomment-68158518">按鈕</a>起些作用。</p>
+<p>當然 Type Cover 也要<a href="https://github.com/nuclearsandwich/surface3-archlinux/issues/4#issuecomment-62277004">配置</a>。~~不過我碰到了一些問題，
+一旦碰到 Type Cover 的觸摸板，X 便段錯誤崩潰了。
+我沒有找到類似的案例，推測是個例。~~</p>
+<p>此問題已解決，更新 linux-surfacepro3 內核時重新配置了一下 <code>/etc/X11/xorg.conf.d/50-synaptics.conf</code>，觸摸板使用正常~</p>
+<h3>Kernel</h3>
+<p>編譯 aur 裏的 <a href="https://aur.archlinux.org/packages/linux-surfacepro3/">linux-surfacepro3</a> 內核，
+最主要的是打上了電源補丁，終於可以看到電量了。</p>
+<p>装内核時碰上一個坑，/tmp 掛載的大小只有 2G，因爲之前從 aur 打包了幾個軟件而內核又很大，
+所以打包 linux-surfacepro3 時塞滿了 /tmp，導致打包失敗。
+編譯了兩次之後才發覺..
+默默修改 /etc/yaourtrc 中的<code>TMPDIR</code>，</p>
+<pre><code>TMPDIR="$HOME/Aurs"
+</code></pre>
+<h3>Battery</h3>
+<p>在 Windows 下粗略計過一下續航，<ruby>平常使用<rt>瀏覽網頁</rt></ruby>確實能有 8h 之長。
+換到 Linux 之後，用秒錶計算，提示 10% 的電量時，续航 4:29:59 。其中包括 40m- 的 FEZ 遊戲時間。</p>
+<p>估計用 <a href="https://wiki.archlinux.org/index.php/Laptop_Mode_Tools">laptop-mode</a> 之類的動態調頻能延長一些續航。</p>
+<p>最後，編譯 YCM 只用了 2分8秒，而上一個筆記本需要 5分鐘 左右。</p>
+<hr />
+<p>寫完博客第二天 linux-surfacepro3 就<a href="https://github.com/matthewwardrop/linux-surfacepro3">更新</a>了，不得不再編譯一次內核。
+過程順利。</p>
+<p>順便找到一個<a href="https://github.com/AykoPoel/surface3-scripts">自动旋转脚本</a>，雖然不夠流暢，但也可用。</p>
+<p>剩下唯一的問題就是 KDE 缺少一個好用的屏幕鍵盤了吧。</p>
+<hr />
+<p>在 Laptop-mode 下測試，正常使用至 10% 電量，續航 6:21:40。</p>
+<h2>參考</h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface#Secure_Boot">Unified Extensible Firmware Interface - Secure Boot</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Beginners%27_guide">Beginners' guide</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/HiDPI">HiDPI</a></li>
+<li><a href="https://github.com/nuclearsandwich/surface3-archlinux/issues/8">N-Trig Touch Pen - Works great but I have no idea how to configure it!</a></li>
+<li><a href="https://github.com/nuclearsandwich/surface3-archlinux/issues/4">Type Cover 3 not working even after kernel patch</a></li>
+<li><a href="https://aur.archlinux.org/packages/linux-surfacepro3/">aur - linux-surfacepro3</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Laptop_Mode_Tools">Laptop_Mode_Tools</a></li>
+<li><a href="https://github.com/matthewwardrop/linux-surfacepro3">github - linux-surfacepro3</a></li>
+<li><a href="https://github.com/AykoPoel/surface3-scripts">Surface3-Scripts - autorotate.py</a></li>
+</ul>]]></description><guid>https://quininer.github.io/?Surface</guid><author>quininer kel</author></item><item><pubDate>Tue, 21 Apr 2015 09:28:37 -0000</pubDate><description><![CDATA[<h1>Google-Cloud-Security-Scanner</h1>
+<h2><em>Thu Mar  5 14:12:39 2015</em></h2>
+<p>一回来上推就看到个有趣的东西——<a href="https://twitter.com/paradoxengine/status/568436963960877056">Google Cloud Security Scanner</a>，
+虽然目前只是Beta，主要只有XSS检测和分析功能，不过怎么说也是<strong>Google</strong>出品。</p>
+<p><a href="https://cloud.google.com/tools/security-scanner/"><img alt="" src="/upload/gcsscan.png" /></a></p>
+<p>亲测一番效果一般，可以选择前端测试环境。
+有一点比较麻烦，目前只允许扫描自己有权限的Gae应用。
+不过只要用Gae做个Proxy应用就能随意扫了。</p>
+<p>没有太大亮点。不过比上不足比下有余，比起市面上大部份云扫描器算是好得多了。</p>
+<hr />
+<p>其实用<code>asyncio</code>写了半个Proxy应用来着，才反应过来Gae没有<code>Python 3.4</code>。
+在Github里找了个<a href="https://github.com/kitek/GAE-http-proxy">成品</a>，效果不错。</p>]]></description><link>https://quininer.github.io/?Google-Cloud-Security-Scanner</link><title>Google-Cloud-Security-Scanner</title><guid>https://quininer.github.io/?Google-Cloud-Security-Scanner</guid><author>quininer kel</author></item><item><description><![CDATA[<h1>关于expressjs的一个小坑</h1>
+<h2><em>Tue Dec  9 01:07:53 2014</em></h2>
+<p>都知道在PHP里，<code>/?key[arr]=value</code> 会被解析为</p>
+<pre><code>array(1) { ["key"]=&gt; array(1) { ["arr"]=&gt; string(5) "value" } }
+</code></pre>
+<p>却一直没注意到expressjs里也会如此，</p>
+<pre><code>// GET /shoes?order=desc&amp;shoe[color]=blue&amp;shoe[type]=converse
+req.query.order
+// =&gt; "desc"
+
+req.query.shoe.color
+// =&gt; "blue"
+
+req.query.shoe.type
+// =&gt; "converse"
+</code></pre>
+<p>而在<a href="http://expressjs.com/4x/api.html#req.query">req.query</a>里仅仅是这样不太显眼的一笔带过，似乎嵌套解析已成标配。
+但是不得不说的是嵌套解析至少在Node.js里很危险。</p>
+<p>例如</p>
+<pre><code>app.get('/', function(req, res){
+    sql.find({_id:req.query.id})
+    .exec(function(err, data){
+        res.json({data:data});
+    });
+});
+</code></pre>
+<p>访问<code>/?id[$ne]=1</code>则会返回不该有的数据，正如<a href="http://drops.wooyun.org/tips/3939">这里</a>。</p>
+<p>当然这不是mongodb的问题，参数的属性也可能被劫持</p>
+<pre><code>app.get('/', function(req, res){
+    if(req.query.name.length &lt;= 5){
+        // TODO
+        res.json({'err':null, 'name':req.query.name});
+    }else{
+        res.json({'err':'名字过长！'});
+    };
+});
+</code></pre>
+<p>使用<code>/?name[length]=1</code>即能绕过这个名字长度的限制。</p>
+<p>同样的利用方法在更奇怪的环境可能会造成更严重的后果，最终导致<strong>code injection</strong>也并非不可能。<br />
+大概是意识到了这点，开发团队在下一个Web框架<a href="http://koajs.com/#request-query">koa</a>里取消了对嵌套解析的支持。<br />
+后续分离的<a href="https://github.com/expressjs/cookie-parser">cookie-parser</a>也不支持嵌套解析。</p>
+<p>最后，我的粗略的解决方案是</p>
+<pre><code>app.get('/', function(req, res){
+    var name = (typeof req.query.name == 'string')?req.query.name:undefined;
+    // TODO
+});
+</code></pre>
+<p>或是使用中间件</p>
+<pre><code>app.use(function(req, res, next){
+    for(var i in req.query)if(typeof req.query[i] != 'string')delete req.query[i];
+    for(var i in req.body)if(typeof req.body[i] != 'string')req.body[i] = JSON.stringify(req.body[i]);
+    next();
+});
+</code></pre>
+<hr />
+<p><strong>总之，务必先验证<code>req.query.name</code>，<code>req.body.name</code>以及<code>req.param('name')</code>的类型</strong></p>]]></description><author>quininer kel</author><pubDate>Tue, 21 Apr 2015 09:28:15 -0000</pubDate><link>https://quininer.github.io/?%E5%85%B3%E4%BA%8Eexpressjs%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%9D%91</link><title>关于expressjs的一个小坑</title><guid>https://quininer.github.io/?%E5%85%B3%E4%BA%8Eexpressjs%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%9D%91</guid></item><item><author>quininer kel</author><pubDate>Tue, 21 Apr 2015 09:27:02 -0000</pubDate><title>ArriettySong</title><link>https://quininer.github.io/?ArriettySong</link><guid>https://quininer.github.io/?ArriettySong</guid><description><![CDATA[<h1>Arrietty'sSong</h1>
+<h2><em>Sun Sep 21 17:20:47 2014</em></h2>
+<p><img alt="“Karigurashi”作者Studio Ghibli - 官方网站。来自Wikipedia - http://zh.wikipedia.org/wiki/File:Karigurashi.jpg#mediaviewer/File:Karigurashi.jpg" src="https://upload.wikimedia.org/wikipedia/zh/3/38/Karigurashi.jpg" />
+<audio src="https://www.dropbox.com/s/qqxsp3nvw3gvaea/Arrietty%27s%20Song.mp3?dl=1" autoplay type="audio/mpeg"></p>]]></description></item></channel>
+</rss>
