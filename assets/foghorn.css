@@ -100,7 +100,7 @@ blockquote {
     border-left: 1px solid #ddd;
 }
 pre {
-    overflow: auto;
+    overflow: unset;
 }
 code {
     font-family: monospace, "Consolas", "Menlo", "Monaco", serif;

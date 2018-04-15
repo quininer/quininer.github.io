@@ -10,7 +10,45 @@
         <generator>rssgen 1.0</generator>
         <copyright>BY-NC-SA 4.0</copyright>
         <language>zh</language>
-        <item><author>quininer kel</author><pubDate>Tue, 06 Oct 2015 06:49:18 -0000</pubDate><guid>https://quininer.github.io/?%E5%9F%BA%E4%BA%8EserviceWorker%E7%9A%84%E7%BC%93%E5%AD%98%E6%8A%95%E6%AF%92</guid><link>https://quininer.github.io/?%E5%9F%BA%E4%BA%8EserviceWorker%E7%9A%84%E7%BC%93%E5%AD%98%E6%8A%95%E6%AF%92</link><title>基于serviceWorker的缓存投毒</title><description><![CDATA[<h1>基于serviceWorker的缓存投毒</h1>
+        <item><author>quininer kel</author><title>Stratis</title><link>https://quininer.github.io/?Stratis</link><description><![CDATA[<h1>Stratis</h1>
+<h2><em>Sun Apr 15 18:14:39 2018</em></h2>
+<p><a href="https://stratis-storage.github.io/">Stratis</a> 是 redhat 放棄 Btrfs 之後推出的代替品，
+使用類似 LVM 的方案來提供有如 btrfs、zfs 般強大的功能。</p>
+<p>其實 <a href="https://stratis-storage.github.io/">Stratis</a> 釋出 0.5 有一段時間了，今次抽出時間來嚐下鮮。
+<a href="https://stratis-storage.github.io/">Stratis</a> 目前沒有面向用戶的文檔，故久違的寫一篇博文用以記錄。</p>
+<h2>準備工作</h2>
+<p>從 AUR 安裝 <a href="https://aur.archlinux.org/packages/stratisd/">stratisd</a>
+同 <a href="https://aur.archlinux.org/packages/stratis-cli/">stratis-cli</a>，
+然後啟動 stratisd</p>
+<p><code>$ systemctl start stratisd</code></p>
+<h2>開始</h2>
+<p>首先我們清理要用的塊設備</p>
+<p><code>$ sudo wipefs -a /dev/sda</code></p>
+<p>但當前版本創建 pool 的時候會碰到錯誤，stratisd 認爲這個塊設備已經被使用</p>
+<p><code>$ stratis pool create stratis /dev/sda
+Execution failed: 1: Device /dev/sda appears to belong to another application</code></p>
+<p>根據 <a href="https://github.com/stratis-storage/stratisd/issues/822#issuecomment-371585235">issue</a>，
+如果塊設備的前 <code>4</code>/<code>8</code>k 字節未置零，stratisd 不會使用它。</p>
+<p>知道原因就簡單了，我們將它置零</p>
+<p><code>$ dd if=/dev/zero of=/dev/sda bs=1024 count=8</code></p>
+<p>然後就可以正常創建 pool</p>
+<p><code>$ stratis pool create stratis /dev/sda
+$ stratis pool list
+Name       Total Physical Size  Total Physical Used
+stratis           &gt; 238.47 GiB               52 MiB</code></p>
+<p>隨後創建 fs</p>
+<p><code>$ stratis fs create stratis storage
+$ stratis fs list stratis
+Name
+storage
+$ la /dev/stratis/stratis/storage
+Permissions Size User Date Modified Name
+lrwxrwxrwx     9 root 15 4月  18:21 /dev/stratis/stratis/storage -&gt; /dev/dm-6</code></p>
+<h2>完成</h2>
+<p>創建完成，直接掛載就可以使用啦</p>
+<p><code>$ sudo mount /dev/stratis/stratis/storage /run/media/quininer/storage
+$ sudo chown quininer /run/media/quininer/storage</code></p>
+<p>用得開心。 ;-)</p>]]></description><guid>https://quininer.github.io/?Stratis</guid><pubDate>Sun, 15 Apr 2018 16:27:40 -0000</pubDate></item><item><author>quininer kel</author><pubDate>Tue, 06 Oct 2015 06:49:18 -0000</pubDate><guid>https://quininer.github.io/?%E5%9F%BA%E4%BA%8EserviceWorker%E7%9A%84%E7%BC%93%E5%AD%98%E6%8A%95%E6%AF%92</guid><link>https://quininer.github.io/?%E5%9F%BA%E4%BA%8EserviceWorker%E7%9A%84%E7%BC%93%E5%AD%98%E6%8A%95%E6%AF%92</link><title>基于serviceWorker的缓存投毒</title><description><![CDATA[<h1>基于serviceWorker的缓存投毒</h1>
 <h2><em>Sat May  2 20:52:57 2015</em></h2>
 <p>前几天才察觉到 Chromium 42 已经支持 Fetch API 了，
 鉴于我早就想用 Fetch 代替 Ajax，
