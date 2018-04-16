@@ -15,6 +15,7 @@
 + [zwindl](https://zwindl.github.io/)
 + [LastAvengers](https://tech.silverrainz.me/)
 + [stevearzh](https://stevearzh.github.io)
++ [Equim](https://ekyu.moe/)
 
 --------------------------------------------
 
