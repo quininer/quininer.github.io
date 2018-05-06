@@ -10,7 +10,92 @@
         <generator>rssgen 1.0</generator>
         <copyright>BY-NC-SA 4.0</copyright>
         <language>zh</language>
-        <item><author>quininer kel</author><title>Stratis</title><link>https://quininer.github.io/?Stratis</link><description><![CDATA[<h1>Stratis</h1>
+        <item><author>quininer kel</author><title>wasm-stack-overflow</title><link>https://quininer.github.io/?wasm-stack-overflow</link><description><![CDATA[<h1>WebAssembly StackOverflow</h1>
+<h2><em>Mon Apr 30 16:50:47 2018</em></h2>
+<p><a href="http://webassembly.org/">WebAssembly</a> 是一個設計運行在瀏覽器上的類彙編語言，
+藉助它可以令 C / C++ 之類的語言運行在瀏覽器上，以期得到性能提升。</p>
+<p>新功能自然會引入新攻擊面，可以預見 C / C++ 上經常出現的溢出攻擊並不會在 wasm 上消失。</p>
+<p>WebAssembly 同常見的彙編有很多不一樣的地方，例如</p>
+<ul>
+<li>它是一個 <a href="https://docs.google.com/document/d/1CieRxPy3Fp62LQdtWfhymikb_veZI7S9MnuCZw7biII/edit">Stack Machine</a></li>
+<li>它使用 <a href="http://webassembly.org/docs/semantics/#linear-memory">Linear Memory</a></li>
+<li>指令與線性內存隔離</li>
+<li>…</li>
+</ul>
+<p>因爲第三點，WebAssembly 在一定程度上是 <a href="https://en.wikipedia.org/wiki/Harvard_architecture">Harvard architecture</a>，這爲 wasm 帶來了很大的安全優勢。</p>
+<p>指令與數據隔離，使得 ROP、return2libc 之類的技巧不可能，但棧溢出本身仍是可能的。</p>
+<p>我們舉個虛構的例子來證明 wasm 棧溢出的可行性</p>
+<p>Rust 代碼:</p>
+<p>```rust
+// ...</p>
+<h1>[wasm_bindgen]</h1>
+<p>pub fn hash_with_key(key: &amp;str, data: &amp;str) -&gt; u32 {
+    let mut val = [0; 32];
+    let key = key.as_bytes();
+    let data = data.as_bytes();</p>
+<pre><code>val[..3].copy_from_slice(&amp;key[..3]);
+val[3] = 0x33;
+val[4..][..data.len()].copy_from_slice(&amp;data);
+
+js_hash(&amp;val)
+</code></pre>
+<p>}</p>
+<h1>[wasm_bindgen]</h1>
+<p>pub fn table_index(i: usize) -&gt; u8 {
+    let a = [b'a', b'd', b'c', b'b'];
+    unsafe { *a.get_unchecked(i) }
+}
+```</p>
+<p>WebAssembly 的 wat 格式基於 sexp，指令精簡，與傳統彙編相比，相對容易閱讀。</p>
+<p>鑑於編譯出的 wasm 較長，下面我們只看我們關心的內容，
+完整的內容可以看<a href="https://gist.github.com/quininer/53820dbf2bcadfca807aee1e9adb4865#file-wasm_stack_overflow_zero_bg-wat">這裏</a>。</p>
+<p><code>wasm
+(global (;0;) (mut i32) (i32.const 1050544))</code></p>
+<p><code>global</code> 定義了一塊全局內存。其中一部分是數據段，剩下的 <code>1</code>MB 是棧空間。</p>
+<p>```wasm
+  (func $hash_with_key (type 2) (param i32 i32) (result i32)
+    (local i32 i32 i32)
+    get_global 0
+    i32.const 32
+    i32.sub</p>
+<pre><code>;; ...
+
+    get_local 2
+    get_local 0
+    i32.load16_u align=1
+    i32.store16
+    get_local 2
+    get_local 0
+    i32.const 2
+    i32.add
+    i32.load8_u
+    i32.store8 offset=2
+
+;; ...
+</code></pre>
+<p>)
+```</p>
+<p>函數 <code>hash_with_key</code> 在棧上開闢 <code>32</code>bytes，將 key 寫入棧上，退棧時未將其清零。</p>
+<p>```wasm
+  (func $table_index (type 4) (param i32) (result i32)
+    (local i32)
+    get_global 0
+    i32.const 16
+    i32.sub</p>
+<pre><code>;; ...
+
+i32.const 12
+i32.add
+get_local 0
+i32.add
+i32.load8_u)
+</code></pre>
+<p>```</p>
+<p>函數 <code>table_index</code> 在棧上開闢 <code>16</code>bytes，偏移 <code>12</code>bytes 讀取。</p>
+<p>在用戶正常調用 <code>hash_with_key(..)</code> 之後攻擊者調用 <code>table_index(16-12-32+x)</code> 便可獲得 key。</p>
+<p><img alt="Read Stack Overflow" src="/upload/wasm-read-stack.png" /></p>
+<hr />
+<p>作者不熟悉二進制安全、計算機原理。胡言亂語不知所云，有錯勿怪。</p>]]></description><guid>https://quininer.github.io/?wasm-stack-overflow</guid><pubDate>Sun, 06 May 2018 12:42:20 -0000</pubDate></item><item><author>quininer kel</author><title>Stratis</title><link>https://quininer.github.io/?Stratis</link><description><![CDATA[<h1>Stratis</h1>
 <h2><em>Sun Apr 15 18:14:39 2018</em></h2>
 <p><a href="https://stratis-storage.github.io/">Stratis</a> 是 redhat 放棄 Btrfs 之後推出的代替品，
 使用類似 LVM 的方案來提供有如 btrfs、zfs 般強大的功能。</p>
