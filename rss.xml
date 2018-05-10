@@ -14,17 +14,18 @@
 <h2><em>Mon Apr 30 16:50:47 2018</em></h2>
 <p><a href="http://webassembly.org/">WebAssembly</a> 是一個設計運行在瀏覽器上的類彙編語言，
 藉助它可以令 C / C++ 之類的語言運行在瀏覽器上，以期得到性能提升。</p>
-<p>新功能自然會引入新攻擊面，可以預見 C / C++ 上經常出現的溢出攻擊並不會在 wasm 上消失。</p>
-<p>WebAssembly 同常見的彙編有很多不一樣的地方，例如</p>
+<p>新功能自然會引入新攻擊面，可以預見 C / C++ 上經常出現的緩衝區溢出並不會在 WebAssembly 上消失。</p>
+<h2>有什麼不同</h2>
+<p>WebAssembly 同常見的彙編有很多不同的地方，例如</p>
 <ul>
 <li>它是一個 <a href="https://docs.google.com/document/d/1CieRxPy3Fp62LQdtWfhymikb_veZI7S9MnuCZw7biII/edit">Stack Machine</a></li>
 <li>它使用 <a href="http://webassembly.org/docs/semantics/#linear-memory">Linear Memory</a></li>
-<li>指令與線性內存隔離</li>
+<li>指令與數據隔離</li>
 <li>…</li>
 </ul>
-<p>因爲第三點，WebAssembly 在一定程度上是 <a href="https://en.wikipedia.org/wiki/Harvard_architecture">Harvard architecture</a>，這爲 wasm 帶來了很大的安全優勢。</p>
-<p>指令與數據隔離，使得 ROP、return2libc 之類的技巧不可能，但棧溢出本身仍是可能的。</p>
-<p>我們舉個虛構的例子來證明 wasm 棧溢出的可行性</p>
+<p>因爲第三點，WebAssembly 在一定程度上是 <a href="https://en.wikipedia.org/wiki/Harvard_architecture">Harvard architecture</a>，這爲 WebAssembly 帶來了很大的安全優勢，但棧溢出仍是可能的。</p>
+<h2>一個例子</h2>
+<p>我們舉個虛構的例子來證明 WebAssembly 棧溢出的可行性。</p>
 <p>Rust 代碼:</p>
 <p>```rust
 // ...</p>
@@ -46,13 +47,13 @@ js_hash(&amp;val)
     unsafe { *a.get_unchecked(i) }
 }
 ```</p>
-<p>WebAssembly 的 wat 格式基於 sexp，指令精簡，與傳統彙編相比，相對容易閱讀。</p>
-<p>鑑於編譯出的 wasm 較長，下面我們只看我們關心的內容，
+<p>WebAssembly 的 wat 格式基於 <a href="https://en.wikipedia.org/wiki/S-expression">S-expression</a>，指令精簡，與傳統彙編相比，相對容易閱讀。</p>
+<p>但鑑於編譯出的 wasm 較長，下面我們只看我們關心的內容，
 完整的內容可以看<a href="https://gist.github.com/quininer/53820dbf2bcadfca807aee1e9adb4865#file-wasm_stack_overflow_zero_bg-wat">這裏</a>。</p>
-<p><code>wasm
-(global (;0;) (mut i32) (i32.const 1050544))</code></p>
-<p><code>global</code> 定義了一塊全局內存。其中一部分是數據段，剩下的 <code>1</code>MB 是棧空間。</p>
-<p>```wasm
+<p><code>(global (;0;) (mut i32) (i32.const 1050544))</code></p>
+<p>指令 <code>global</code> 定義了一塊可變的全局內存。
+其中 <code>1</code>MB 是棧空間，剩下的是數據段。</p>
+<p>```
   (func $hash_with_key (type 2) (param i32 i32) (result i32)
     (local i32 i32 i32)
     get_global 0
@@ -75,8 +76,8 @@ js_hash(&amp;val)
 </code></pre>
 <p>)
 ```</p>
-<p>函數 <code>hash_with_key</code> 在棧上開闢 <code>32</code>bytes，將 key 寫入棧上，退棧時未將其清零。</p>
-<p>```wasm
+<p>函數 <code>hash_with_key</code> 在棧上開闢 <code>32</code>bytes，將 key 寫入棧上，而退棧時未將其清零。</p>
+<p>```
   (func $table_index (type 4) (param i32) (result i32)
     (local i32)
     get_global 0
@@ -91,11 +92,29 @@ i32.add
 i32.load8_u)
 </code></pre>
 <p>```</p>
-<p>函數 <code>table_index</code> 在棧上開闢 <code>16</code>bytes，偏移 <code>12</code>bytes 讀取。</p>
-<p>在用戶正常調用 <code>hash_with_key(..)</code> 之後攻擊者調用 <code>table_index(16-12-32+x)</code> 便可獲得 key。</p>
+<p>函數 <code>table_index</code> 在棧上開闢 <code>16</code>bytes，偏移 <code>12</code>bytes 讀取一個 byte。</p>
+<p>簡單分析可以知道，在用戶正常調用 <code>hash_with_key(..)</code> 之後，
+攻擊者只需要調用 <code>table_index(16 - 12 - 32 + x)</code> 便可獲得寫入棧上的 key。</p>
 <p><img alt="Read Stack Overflow" src="/upload/wasm-read-stack.png" /></p>
+<h2>侷限</h2>
+<p>雖然棧溢出是可行的，
+但指令與數據的分離，使得我們只能讀寫棧內容而不能改變控制流。
+這意味著 ROP、return2libc 之類的技巧不再有效，
+棧溢出將只能在邏輯方面造成一些影響，危險度下降不止一個等級。</p>
+<h2>柳暗花明</h2>
+<p>而 WebAssembly 想要支持 函數指針、虛函數、trait 對象，就必須引入一些動態方案。</p>
+<p>WebAssembly 的方案是將所有需要動態使用的函數放入 <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format#WebAssembly_tables">Table</a>，
+在運行時通過引索指定，並且在調用時會檢查函數簽名。</p>
+<p>這個設計試圖在最大程度上降低風險，但無可避免的爲攻擊者開了一扇窗。</p>
+<h2>XSS Game</h2>
+<p>基於 WebAssembly 棧溢出，我做了一個簡單的 <a href="https://quininer.github.io/wasm-xss-game/">XSS Challenge</a>，
+源代碼託管在 <a href="https://github.com/quininer/wasm-xss-game">wasm-xss-game</a>。
+有興趣的讀者可以一試。</p>
 <hr />
-<p>作者不熟悉二進制安全、計算機原理。胡言亂語不知所云，有錯勿怪。</p>]]></description><guid>https://quininer.github.io/?wasm-stack-overflow</guid><pubDate>Sun, 06 May 2018 12:42:20 -0000</pubDate></item><item><author>quininer kel</author><title>Stratis</title><link>https://quininer.github.io/?Stratis</link><description><![CDATA[<h1>Stratis</h1>
+<ul>
+<li>本文有意忽略堆溢出，以避免引入衆多 Allocator 的複雜性。</li>
+<li>作者不熟悉二進制安全、計算機原理。胡言亂語不知所云，有錯勿怪。</li>
+</ul>]]></description><guid>https://quininer.github.io/?wasm-stack-overflow</guid><pubDate>Thu, 10 May 2018 18:31:44 -0000</pubDate></item><item><author>quininer kel</author><title>Stratis</title><link>https://quininer.github.io/?Stratis</link><description><![CDATA[<h1>Stratis</h1>
 <h2><em>Sun Apr 15 18:14:39 2018</em></h2>
 <p><a href="https://stratis-storage.github.io/">Stratis</a> 是 redhat 放棄 Btrfs 之後推出的代替品，
 使用類似 LVM 的方案來提供有如 btrfs、zfs 般強大的功能。</p>
