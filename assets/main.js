@@ -57,9 +57,9 @@ var load = {
 				$.dom('#list').add(
 					$.dom('<li>').add(
 						$.dom('<a>').attr({
-							'data-href': page,
-							'href': `?${page}`
-						}).content(page).on('click', load._link)
+							'data-href': page.href,
+							'href': `?${page.href}`
+						}).content(page.name).on('click', load._link)
 					)
 				);
 			});
@@ -116,7 +116,6 @@ var load = {
 		});
 	},
 	'mark': function(page, push){
-		//XXX  es6 Default
 		$.dom('head > title').content(page);
 		if(push===undefined||!!push)window.history.pushState({}, '', `?${page}`);
 		$.dom('#disqus_thread', '#main').forEach(function(e){
@@ -142,7 +141,13 @@ var load = {
 		}).then(function(text){
 			$.dom('#main').append(marked(text));
 			if(!!($.dom('#main > h1')&&$.dom('#main > h2 > em'))){
-				$.dom('.name').content($.dom('#main > h1').textContent);
+				let title = $.dom('#main > h1').textContent;
+
+				if(title.length != 0){
+					$.dom('.name').content(title);
+					$.dom('head > title').content(title);
+				}
+
 				$.dom('.subhead').content($.dom('#main > h2').textContent);
 				$.dom('#main > h1', '#main > h2').forEach(function(e){
 					e.del();
