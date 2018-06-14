@@ -10,7 +10,84 @@
         <generator>rssgen 1.0</generator>
         <copyright>BY-NC-SA 4.0</copyright>
         <language>zh</language>
-        <item><author>quininer kel</author><title>wasm-stack-overflow</title><link>https://quininer.github.io/?wasm-stack-overflow</link><description><![CDATA[<h1>WebAssembly StackOverflow</h1>
+        <item><author>quininer kel</author><title>tamarin-and-badake</title><link>https://quininer.github.io/?tamarin-and-badake</link><description><![CDATA[<h1>如何設計一個壞協議</h1>
+<h2><em>Wed Jun 13 19:44:31 2018</em></h2>
+<p>近幾日看 <a href="https://cyber.biu.ac.il/event/8th-biu-winter-school/">The 8th BIU Winter School on Cryptography</a> 的 slide，
+這期冬令營主要內容是協議設計。</p>
+<p>冬令營第二講 <a href="http://cyber.biu.ac.il/wp-content/uploads/2017/08/KE2_Hugo_BIU_Feb2018.pdf">Implicitly Authenticated KE Protocols</a> 拋磚引玉，
+提出了一個相當簡潔的兩消息<ruby>隱式帶認證密鑰交換<rt>Implicitly Authenticated Key Exchange</rt></ruby>協議，</p>
+<p>後文將稱之爲 <ruby>BADAKE<rt>Basic A-round Diffie-hellman Authenticated Key Exchange</rt></ruby>。</p>
+<p><img alt="BADAKE" src="./upload/badake.png" /></p>
+<p>這是一個相當乾淨的協議，甚至可能大家自己就在實踐中設計過類似的協議。
+但這不是一個安全的協議。</p>
+<p>slide 中已經舉出了一些該協議的攻擊，這些攻擊並不那麼直觀。</p>
+<h2>Define</h2>
+<p>在描述這些攻擊之前，我們先澄清一些定義。</p>
+<ul>
+<li>隱式帶認證密鑰交換:
+    與顯式認證密鑰交換不同，隱式認證協議不會在協議執行中顯式的失敗，
+    但只有雙方身份正確時會生成相同的密鑰。</li>
+<li>認證協議安全要求: 一個合格的認證協議應該在協議完成之後保證<ul>
+<li><ruby>基本僞裝抗性<rt>Basic Impersonation Resistance</rt></ruby>: 若 A 正確執行協議，當敵手不知道 A 的長期密鑰時，敵手不可以僞裝成 A。</li>
+</ul>
+</li>
+<li>密鑰交換協議安全要求: 一個合格的密鑰交換協議應該保證，<ul>
+<li><ruby>完美前向保密<rt>Perfect Forward Secrecy</rt></ruby>: 長期密鑰泄漏時，不會影響之前會話密鑰的安全性。</li>
+<li><ruby>弱前向保密<rt>weak Perfect Forward Secrecy</rt></ruby>: 由於兩消息的認證密鑰交換協議無可能滿足 PFS，所以對於這些協議，退而求其次，我們只要求 wPFS。
+    若敵手在長期密鑰泄漏之前沒有參與協議，那長期密鑰泄漏時，不會影響之前會話密鑰的安全性。</li>
+<li><ruby>已知密鑰安全<rt>Known-Key Security</rt></ruby>: 會話密鑰泄漏時，不會影響長期密鑰及其他會話密鑰的安全性。</li>
+<li><ruby>臨時祕密揭露抗性<rt>Ephemeral Secrets Reveal Resistance</rt></ruby>: 臨時密鑰泄漏時，不會影響長期密鑰及其他會話密鑰的安全性。</li>
+<li><ruby>未知密鑰共享<rt>Unknown Key-Share</rt></ruby>抗性: 當 A 和 C 協商出會話密鑰時，A 不會認爲該密鑰是與 B 協商得到的。</li>
+</ul>
+</li>
+</ul>
+<h2>Signature + DH</h2>
+<p>在分析 BADAKE 前，slide 先給出了一個簡單的簽名與密鑰交換的組合協議。
+這個協議在簽名中加入了目標身份，以避免交錯攻擊。</p>
+<p>但這個協議仍然是不安全的。</p>
+<p>當 A 的臨時密鑰 <code>x</code> 泄漏時，
+攻擊者可以重放消息 <code>g^x, SIG{A}(g^x, B)</code>，與 B 進行握手。
+從而達成僞裝 A 身份的目的。</p>
+<p>一般情況下防止重放攻擊的最好方案是添加一個 challenge，
+但這需要增加一輪通信。</p>
+<p>這個例子說明了使用 Signature + DH 的簡單組合無法實現安全的兩消息帶認證密鑰交換。</p>
+<h2>Implicitly Authenticated DH</h2>
+<p>slide 給出了 BADAKE 的兩種簡單組合方式。</p>
+<p>第一種組合方式相當簡單，
+<code>K = H(g^ab, g^xy)</code></p>
+<p>slide 中描述它受到 <code>Open to known key and interleaving attacks</code> 的威脅。
+一開始我不太明白這個攻擊如何實現。</p>
+<p><a href="https://gist.github.com/quininer/5e29437c3c6e1d66942c8fddb39a8536">藉助 tamarin</a>，
+我們可以輕鬆找到針對這個協議的多個攻擊方案，這裏我們舉出兩個</p>
+<ul>
+<li>反射攻擊</li>
+</ul>
+<p><img alt="reflection attack" src="./upload/reflection_attack.png" /></p>
+<p>A 向 B 發起兩個握手請求，敵手將這兩個請求作爲響應發回給 A。</p>
+<p>A 不會知道他正在和自己通信。（呆萌</p>
+<ul>
+<li>會話密鑰揭露時的交錯攻擊</li>
+</ul>
+<p><img alt="interleaving attack" src="./upload/open_key_interleaving_attack.png" /></p>
+<p>這圖片中描述的攻擊與 slide 可能有所不同。</p>
+<p>此攻擊需要 B 在握手結束之後泄漏會話密鑰。</p>
+<p>B 向 A 發起兩個握手請求，敵手將一個請求作爲響應發回給 B。
+兩個會話產生相同的密鑰，結束其中一個會話，B 泄漏會話密鑰 <code>K</code>。
+敵手使用該密鑰繼續與 B 通信。</p>
+<p>最終達成僞造 A 身份的目的。</p>
+<h2>KCI Attack</h2>
+<p>第二種組合方式添加了角色因素，
+可以對抗反射、並行會話等攻擊方式。
+<code>K = H(g^ab, g^xy, g^x, g^y)</code></p>
+<p>這相比第一種組合方式要好一點，但仍不是一個理想的 AKE 方案。</p>
+<p>slide 中提到了<ruby>密鑰泄漏僞裝攻擊<rt>Key-Compromise Impersonation</rt></ruby>。
+簡單來講就是，在 A 的長期密鑰泄漏之後，敵手不但可以僞裝成 A 與 B 通信，也可以僞裝成 B 與 A 通信。</p>
+<p>這個漏洞在使用密鑰交換作認證的協議裏很常見，例如 <a href="https://github.com/TokTok/c-toxcore/issues/426">Tox</a> 就有這個問題。</p>
+<p>很多人會覺得泄漏長期密鑰之後，協議可以不保證認證安全性。但一個好的認證協議應該要避免這一點。</p>
+<hr />
+<p>上文的內容在冬令營的演講中只佔不到半分鐘時間，而後面關於 MQV、HMQV 的各種變種佔了將近兩個小時。</p>
+<p>設計一個好的密碼協議並不是一件容易的事情。</p>
+<p>而想要設計一個壞協議？只需要拍腦袋式的想一個簡潔的協議就可以了。</p>]]></description><guid>https://quininer.github.io/?tamarin-and-badake</guid><pubDate>Fri, 15 Jun 2018 04:15:41 -0000</pubDate></item><item><author>quininer kel</author><title>wasm-stack-overflow</title><link>https://quininer.github.io/?wasm-stack-overflow</link><description><![CDATA[<h1>WebAssembly StackOverflow</h1>
 <h2><em>Mon Apr 30 16:50:47 2018</em></h2>
 <p><a href="http://webassembly.org/">WebAssembly</a> 是一個設計運行在瀏覽器上的類彙編語言，
 藉助它可以令 C / C++ 之類的語言運行在瀏覽器上，以期得到性能提升。</p>
