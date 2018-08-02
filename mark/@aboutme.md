@@ -18,13 +18,14 @@ Skills
 * 密码学
 	+ 一定的密码学基础
 	+ 一定的协议分析能力
-	+ 实现过一些较新的密码算法
+	+ 实现过一些较新穎的密码算法
 		- [newhope](https://github.com/quininer/newhope)
 		- [dilithium](https://github.com/quininer/dilithium)
 		- [kyber](https://github.com/quininer/kyber)
 		- [gimli](https://github.com/quininer/gimli)
 		- [colm](https://github.com/quininer/colm)
 		- [norx](https://github.com/quininer/norx)
+		- [mrs](https://github.com/quininer/mem-aead-mrs)
 * 基础 Web 编程
 	+ 有一些 Web 安全相关经验
 	+ 包括一些前端知识，例如 WebAssembly
@@ -49,6 +50,14 @@ Projects
 	使用 [dilithium](https://eprint.iacr.org/2017/633.pdf)
 + <ruby>认证加密<rt>Authenticated Encryption</rt></ruby>
 	使用 [norx](https://norx.io/)
+
+### ENE - 2018 - [source](https://github.com/quininer/ene)
+
++ 設計用於郵件的端到端加密工具
++ <ruby>認證密鑰交換<rt>Authenticated Key Exchange</rt></ruby>
++ <ruby>可否認的郵件認證<rt>Deniable authentication</rt></ruby>
++ 具有 Nonce-misuse Resistant 的 AEAD
++ 實驗性的 Post-quantum 密碼套件
 
 
 More Projects

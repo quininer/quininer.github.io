@@ -36,7 +36,7 @@ body {
     font: 1.3em "Vollkorn", Palatino, Times;
     color: #333;
     line-height: 1.4;
-    text-align: justify;
+    text-align: left;
 }
 header, nav, article, main, footer {
     width: 700px;
@@ -145,6 +145,10 @@ p#heart{
 
 img {
     width: 100%;
+}
+
+ruby {
+	ruby-align: center;
 }
 
 /* Home Page
