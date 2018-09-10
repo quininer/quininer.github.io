@@ -29,6 +29,7 @@ Skills
 | [COLM](https://github.com/quininer/colm) | 在线、防滥用的 AEAD 算法
 | [NORX](https://github.com/quininer/norx) | 基于海绵结构、灵活的 AEAD 算法
 | [MEM-AEAD MRS](https://github.com/quininer/mem-aead-mrs) | 基于海绵结构、防滥用的 AEAD 算法
+| [BFenc](https://github.com/noisat-labs/bfenc) | 布隆过滤器加密，允许实现前向保密的 0-RTT 通信
 
 * 基础 Web 编程
 	+ 有 Web 安全相关经验

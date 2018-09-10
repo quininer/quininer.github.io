@@ -10,7 +10,118 @@
         <generator>rssgen 1.0</generator>
         <copyright>BY-NC-SA 4.0</copyright>
         <language>zh</language>
-        <item><author>quininer kel</author><title>ene</title><link>https://quininer.github.io/?ene</link><description><![CDATA[<h1><strong>E</strong>ncrypt o<strong>n</strong> <strong>E</strong>mail</h1>
+        <item><author>quininer kel</author><title>the-grail-of-forward-secrecy</title><link>https://quininer.github.io/?the-grail-of-forward-secrecy</link><description><![CDATA[<h1>0-RTT and Forward Secrecy</h1>
+<h2><em>Tue Sep 11 00:43:19 2018</em></h2>
+<p>前向保密是一個已經被人熟知的安全特性。
+基於密鑰交換的前向安全廣泛存在於各種密碼協議之中，例如 TLS、Signal Protocol、WireGuard。</p>
+<h2>Session based</h2>
+<p>一般我們所說的前向保密方案是基於會話的，每次會話通過握手產生一個獨立的會話密鑰。
+會話結束之後銷毀該會話密鑰便可保證前向保密。</p>
+<p>但基於會話的前向保密並不適用於所有場景，
+很多情況下我們沒有握手的條件、或者通信開銷非常之大。
+例如 Email、<ruby>IoT<rt>Internet of Things</rt></ruby>。</p>
+<p>“如何在這些情況下保證前向保密”成爲了一個聖盃級的公開問題，
+數十年來衆多密碼學家爲此付出心力。</p>
+<p>幸運的是，這並非是無可能的。</p>
+<h2>Interval based</h2>
+<p>基於時間段的前向保密方案聽起來不太優雅，但非常實用。</p>
+<p>基本思路是將密鑰分成不同的時間段。
+在某個時間段過去之後，銷毀該時間段對應的私鑰，從而達到前向保密。</p>
+<h1>Weekend scheme</h1>
+<p>我相信這個方案在歷史上被設計過不止一次，最後一次見到它是在 openpgp 討論中 <sup>1</sup>。
+我不清楚它的名字，本文將之稱爲週末方案。</p>
+<p>用戶每逢週末更換一次自己的密鑰，並將新的公鑰公佈在網絡上。
+其他用戶加密時必須檢索對方的最新公鑰。</p>
+<p>這個方案很簡單，但缺點也很明顯</p>
+<ul>
+<li>要求其他用戶加密時有檢索最新公鑰的能力</li>
+<li>多設備不友好</li>
+</ul>
+<p>每次都要更新公鑰實在是太麻煩了，那可不可以再給力點？</p>
+<h1>HIBE scheme</h1>
+<p>有的！我們首先通俗的介紹一下 <ruby>HIBE<rt>Hierarchical Identity Based Encryption</rt></ruby><sup>2</sup>。</p>
+<p>HIBE 有一個中心的 <ruby>PKG<rt>Private Key Generator</rt></ruby>，它可以通過 ID 產生所有用戶的私鑰。
+每個用戶也能通過子用戶的 ID 產生子用戶的私鑰，自然的，子用戶不能恢復父用戶的私鑰。</p>
+<p>其他用戶加密時只需要知道 <ruby>MPK<rt>Master Public Key</rt></ruby> 和子用戶的 ID。</p>
+<p>我們可以基於 HIBE 構造出一個不需要更換公鑰的前向保密方案。</p>
+<ol>
+<li>
+<p>用戶加密時根據當時的時間產生用戶 ID，並用此進行加密。例如</p>
+<p><code>CT = enc(MPK, ["2018", "9", "10"], MSG)</code></p>
+</li>
+<li>
+<p>用戶解密時，根據 PKG 或父用戶的私鑰產生對應 ID 的私鑰，並用其解密，例如</p>
+<p><code>SUB_SK = keygen(SK, ["2018", "9", "10"])
+MSG = dec(SUB_SK, CT)</code></p>
+</li>
+<li>
+<p>當一個時間段過去時，用戶先用 PKG 或父用戶的私鑰產生剩餘所有子用戶的私鑰，並銷毀 PKG 和父用戶的私鑰。例如</p>
+<p><code>(_, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC) = keygen_year(YEAR)
+delete(YEAR)</code></p>
+</li>
+</ol>
+<p>完美！這個方案完全解決了週末方案的兩個缺點，
+其他用戶不需要時時檢索對方的最新公鑰，用戶自己也不需要在多個設備之間同步自己的新私鑰。</p>
+<p>但是基於時間段的方案有一個共同的缺點，</p>
+<p>試想一個情景，alice 在 2018年9月30號 執行加密，但由於各種原因到達 bob 手中時遲了一日。
+可惜當時 bob 已經將 9月 所對應的私鑰銷毀了，所以他無法解密 alice 的密文。</p>
+<p>這顯然不是我們想要的效果，那可不可以再給力點？</p>
+<h2>Puncture based</h2>
+<p>除了時間段這個思路之外，我們還有沒有其他實現前向保密的辦法呢？</p>
+<p>可穿刺加密是另一種思路，
+原始狀態下的私鑰包含所有信息，可以解密所有密文。
+當用戶成功解密一個密文後，用戶可以從私鑰中消除（我們將之稱爲<ruby>穿刺<rt>Puncture</rt></ruby>）一部分信息，
+使得新私鑰不能解密該密文。</p>
+<h1>Binary Tree Encryption scheme</h1>
+<p><ruby>BTE<rt>Binary Tree Encryption</rt></ruby><sup>3,4</sup> 是一個有趣的設計，它同樣基於 HIBE。</p>
+<p>它相當於使用 IBE 產生一個巨大的私鑰集，
+然後使用和密文對應的 tag 確定其中一個 ID 或密鑰（通過一個 Hash）。</p>
+<p>穿刺時，通過 Hash 該 tag 來確定私鑰，然後銷毀它。</p>
+<p>但是一個夠用的私鑰集相當大，假設一個私鑰大小爲 64b，我們期望有 2^32 個私鑰可以用，
+那最終儲存這個密鑰集我們需要 274877.907 MB。</p>
+<p>這是不現實的。</p>
+<p>但我們可以通過 HIBE 來懶惰式的生成私鑰，這可以有效的將最壞情況下的密文尺寸降低一半。</p>
+<h1>Bloom Filter Encryption scheme</h1>
+<p><ruby>BFE<rt>Bloom Filter Encryption</rt></ruby><sup>5</sup> 是 BTE 的一個有趣變種。</p>
+<p>它使用一個 Bloom Filter 來降低 tag 的碰撞率，代價是較快的空間使用速度。</p>
+<ul>
+<li>加密時，使用 <ruby>IBBE<rt>Identity Based Broadcast Encryption</rt></ruby> 將消息廣播加密
+    給 bloom filter 選擇出的 k 個 ID。</li>
+<li>解密時，使用 k 個 ID 中其中一個可用的 ID 進行解密，若均不可用則解密失敗。</li>
+<li>穿刺時，將這 k 個 ID 對應的私鑰銷毀。</li>
+</ul>
+<p>無論如何，基於 IBE 的可穿刺加密仍有相當大的私鑰尺寸。那，可不可以再給力點？</p>
+<h1>Non-Monotonic ABE scheme</h1>
+<p>照例我們先簡單介紹一下 <ruby>NM-ABE<rt>Non-Monotonic Attribute based encryption</rt></ruby><sup>6</sup>。</p>
+<p>ABE 就像 IBE，但它使用<ruby>屬性<rt>Attribute</rt></ruby> 而不是 ID 來進行加密。
+<ruby>KP<rt>Key Policy</rt></ruby>-ABE 是指是加密時爲密文指定屬性，只有符合某個規則的私鑰可以解密。</p>
+<p>而一般 ABE 的規則是單調的，即是說只有 And 和 Or 兩種規則。
+非單調性 ABE 的有趣之處是支持 Not 規則。</p>
+<p>有了 NM-ABE，構建可穿刺加密變得非常直觀。加密解密時和普通 ABE 一樣。
+穿刺時，只需在私鑰規則中增加一條 <code>Not(tag)</code>。<sup>7</sup></p>
+<p>至此，該方案的私鑰大小只會隨着穿刺次數線性增長，而不會爆炸。</p>
+<h1>Binary Tree Bloom Filter Encryption?</h1>
+<p>我們可以將 BTE 和 BFE 結合，
+利用 <ruby>HIBBE<rt>Hierarchical Identity Based Broadcast Encryption</rt></ruby>
+構造出 <ruby>BTBFE<rt>Binary Tree Bloom Filter Encryption</rt></ruby>。</p>
+<p>理論上這可以將 BFE 的私鑰尺寸降得更低，但我沒有找到合適的 HIBBE 方案實現它。</p>
+<h2>Perfect?</h2>
+<p>我們介紹了數個在限制情況下保證前向保密的加密方案，看起來似乎足夠讓人們戴着鐐銬跳舞。</p>
+<p>如果這些方案足夠高效，是不是意味著我們再不需要握手，無延遲的 0-RTT 通信可以全面推廣呢？</p>
+<p>很遺憾並不是，這些方案只能保證“前向保密”。</p>
+<p>而基於會話的方案除了前向保密之外還保證了“弱後向保密”，
+即在泄漏長期私鑰時，若敵手在之後沒有參與協議，那協議仍能保證之後密文的保密性。</p>
+<p>當然，這一切在量子敵手面前都毫無意義。</p>
+<hr />
+<ol>
+<li><a href="https://mailarchive.ietf.org/arch/msg/openpgp/mk8_FSS-n4DVGfh_VwuGtEOS2xk">Clarify status of subkeys with certification use</a></li>
+<li><a href="http://cryptowiki.net/index.php?title=Identity-based_encryption_schemes#Hierarchical_Identity_Based_Encryption">Hierarchical Identity Based Encryption</a></li>
+<li><a href="https://www.cs.umd.edu/~jkatz/papers/BTE-survey.pdf">Binary Tree Encryption: Constructions and Applications</a></li>
+<li><a href="https://eprint.iacr.org/2017/223">0-RTT Key Exchange with Full Forward Secrecy</a></li>
+<li><a href="https://eprint.iacr.org/2018/199">Bloom Filter Encryption and Applications to Efficient Forward-Secret 0-RTT Key Exchange</a></li>
+<li><a href="http://cryptowiki.net/index.php?title=Attribute-based_encryption#Encryption_with_non-monotone_access_structure">Encryption with non-monotone access structure</a></li>
+<li><a href="http://cs.jhu.edu/~imiers/pdfs/forwardsec.pdf">Forward Secure Asynchronous Messaging from Puncturable Encryption</a></li>
+</ol>]]></description><guid>https://quininer.github.io/?the-grail-of-forward-secrecy</guid><pubDate>Wed, 12 Sep 2018 09:23:29 -0000</pubDate></item><item><author>quininer kel</author><title>ene</title><link>https://quininer.github.io/?ene</link><description><![CDATA[<h1><strong>E</strong>ncrypt o<strong>n</strong> <strong>E</strong>mail</h1>
 <h2>什麼是 ENE？</h2>
 <p>ENE 是一個實驗性質的、設計用於郵件的、<ruby>端到端<rt>End to End</rt></ruby>加密工具。
 它基本上是我設想中的 OpenPGP 2.0，針對 PGP 的弱點作出了一些改進。</p>
