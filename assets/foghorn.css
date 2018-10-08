@@ -1,32 +1,5 @@
 @import url(./Vollkorn.css);
 
-::selection { background-color:#CCC; }
-::-webkit-scrollbar {
-    width:10px;
-    height:10px;
-    background:#CCC;
-}
-::-webkit-scrollbar-thumb {
-    background:#999;
-    border-radius:5px;
-}
-::-webkit-scrollbar-thumb:hover { background:#666; }
-::-webkit-scrollbar-corner { background:#CCC; }
-code::-webkit-scrollbar {
-    width:10px;
-    height:10px;
-    background:#F6F6F6;
-    border-top:1px solid #CCC;
-    padding-top:1px;
-}
-code::-webkit-scrollbar-thumb {
-    background:#EEE;
-    border-radius:5px;
-    border:1px solid #CCC;
-    border-bottom:0px;
-    }
-code::-webkit-scrollbar-thumb:hover { background:#DDD; }
-
 html, body {
     padding:1em;
     margin:auto;
@@ -37,6 +10,7 @@ body {
     color: #333;
     line-height: 1.4;
     text-align: left;
+	scrollbar-color: #999 #ccc;
 }
 header, nav, article, main, footer {
     width: 700px;
