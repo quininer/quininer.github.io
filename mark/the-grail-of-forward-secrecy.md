@@ -113,7 +113,7 @@ Binary Tree Encryption scheme
 
 這是不現實的。
 
-但我們可以通過 HIBE 來懶惰式的生成私鑰，這可以有效的將最壞情況下的密文尺寸降低一半。
+但我們可以通過 HIBE 來懶惰式的生成私鑰，這可以有效的將最壞情況下的密鑰尺寸降低一半。
 
 Bloom Filter Encryption scheme
 ==============================

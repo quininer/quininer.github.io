@@ -16,7 +16,5 @@
 + [LastAvengers](https://tech.silverrainz.me/)
 + [stevearzh](https://stevearzh.github.io)
 + [Equim](https://ekyu.moe/)
-
---------------------------------------------
-
-[我的旧博客](http://quininer.tumblr.com/)
++ [xuanwo](https://xuanwo.io/)
++ [megumifox](https://blog.megumifox.com/public/index.html)
