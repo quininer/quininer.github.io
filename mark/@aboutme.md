@@ -46,11 +46,12 @@ Projects
 
 | Project	| Description
 |-----------|--------------
-| [tokio-rustls](https://github.com/quininer/tokio-rustls) | <ruby>纯 Rust TLS 库<rt>[rustls]</rt></ruby>的<ruby>异步<rt>[tokio]</rt></ruby>支持
+| [tokio-rustls](https://github.com/tokio-rs/tls/tree/master/tokio-rustls) | <ruby>纯 Rust TLS 库<rt>[rustls]</rt></ruby>的<ruby>异步<rt>[tokio]</rt></ruby>支持
 | [x11-clipboard](https://github.com/quininer/x11-clipboard) | x11 剪切板库
 | [webdir](https://github.com/Tyzzer/webdir) | 一个简单的异步的静态文件 HTTP 服务器
 | [rust-hacl-star](https://github.com/quininer/rust-hacl-star) | [HACL\*] 的安全薄包装
 | [nosni-proxy](https://github.com/quininer/nosni-proxy) | 一個簡單的隱私工具
+| [io-uring](https://github.com/tokio-rs/io-uring) | linux io-uring 封裝
 
 
 [Rust]: https://www.rust-lang.org/
