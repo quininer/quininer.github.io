@@ -18,3 +18,4 @@
 + [Equim](https://ekyu.moe/)
 + [xuanwo](https://xuanwo.io/)
 + [megumifox](https://blog.megumifox.com/public/index.html)
++ [szclsya](https://szclsya.me)
