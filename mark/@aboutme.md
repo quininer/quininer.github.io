@@ -13,8 +13,6 @@ Skills
 
 * 编程语言
 	+ 自 2016 年以来，长期使用 [Rust]
-	+ 曾使用 Python、JavaScript
-	+ 曾接触 D、OCaml
 * 密码学
 	+ 一定的密码学基础
 	+ 一定的密码协议分析能力
@@ -34,27 +32,41 @@ Skills
 * 基础 Web 编程
 	+ 有 Web 安全相关经验
 	+ 包括一些前端知识，例如 WebAssembly
+* 一定的二進制分析能力
+    + 負責過線上產品的崩潰分析、產物問題分析
+    + 實現過一些個人用的分析工具
+
+| Name | Description
+|------|-------------
+| [symbol-tools](https://github.com/quininer/symbol-tools) | 個人用的符號分析工具
+| [mydbg](https://github.com/quininer/mydbg) | 個人用的 lldb plugin
+
 * 日常使用 Arch Linux、Neovim，较熟悉 Linux 环境
 
 Experience
 ----------
 
-### Bytedance - 2018
+### Bytedance - 2018 ~ 2024
+
+* Lark SDK
+
+### Bytedance - 2024 ~ today
+
+* ()
 
 Projects
 --------
 
 | Project	| Description
 |-----------|--------------
-| [tokio-rustls](https://github.com/tokio-rs/tls/tree/master/tokio-rustls) | <ruby>纯 Rust TLS 库<rt>[rustls]</rt></ruby>的<ruby>异步<rt>[tokio]</rt></ruby>支持
-| [x11-clipboard](https://github.com/quininer/x11-clipboard) | x11 剪切板库
+| [tokio-rustls](https://github.com/rustls/tokio-rustls) | <ruby>纯 Rust TLS 库<rt>[rustls]</rt></ruby>的<ruby>异步<rt>[tokio]</rt></ruby>支持
 | [webdir](https://github.com/Tyzzer/webdir) | 一个简单的异步的静态文件 HTTP 服务器
-| [rust-hacl-star](https://github.com/quininer/rust-hacl-star) | [HACL\*] 的安全薄包装
 | [nosni-proxy](https://github.com/quininer/nosni-proxy) | 一個簡單的隱私工具
 | [io-uring](https://github.com/tokio-rs/io-uring) | linux io-uring 封裝
+| [cbor4ii](https://github.com/quininer/cbor4ii) | [CBOR] 格式的 Rust 實現
 
 
 [Rust]: https://www.rust-lang.org/
 [tokio]: https://tokio.rs/
 [rustls]: https://github.com/ctz/rustls
-[HACL\*]: https://github.com/mitls/hacl-star
+[CBOR]: https://www.rfc-editor.org/rfc/rfc8949.html
