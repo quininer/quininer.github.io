@@ -7,7 +7,6 @@
 		[
 			{ "name": "about me", "data-href": "@aboutme", "href": "./?@aboutme" },
 			{ "name": "links", "data-href": "@links", "href": "./?@links" },
-			{ "name": "ene", "href": "./quininer.ene" },
 			{ "name": "rss", "href": "./rss.xml"}
 		],
 		[
