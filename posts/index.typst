@@ -9,4 +9,4 @@
 = And
 
 - #link("resume.html")[About Me]
-- #link("/")[Previous Posts]
+- #link("http://quininer.github.io/the-old-blog/")[Previous Posts]
