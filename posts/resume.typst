@@ -1,0 +1,67 @@
+#import "../tools.typst"
+#show: tools.post-web.with(
+  title: "Resume",
+)
+#set text(
+  font: (
+    "Noto Serif",
+    "Noto Sans CJK SC"
+  ),
+  lang: "zh"
+)
+#show link: set text(fill: blue)
+
+= = _Me_
+=
+
+- quininer
+- Blog: https://quininer.github.io/
+- Github: https://github.com/quininer
+- Email: `quininer@live.com`
+
+=
+= = _Skills_
+
+- 编程语言
+  --- 自 2016 年起使用 #link("https://www.rust-lang.org/")[Rust]
+- 密码学
+- 系统编程
+- 编译器
+
+=
+= = _Experience_
+
+== Bytedance -- _2018_ #sym.tilde.basic _2024_
+
+- Lark SDK
+
+== Bytedance -- _2024_ #sym.tilde.basic _today_
+
+- Relax
+- Rspack
+
+=
+= = _Project_
+
+#table(
+  columns: (auto, auto),
+  stroke: none,
+  align: horizon,
+
+  link("https://github.com/rustls/tokio-rustls")[tokio-rustls],
+  [
+    #link("https://github.com/rustls/rustls")[rustls]
+    的
+    #link("https://github.com/tokio-rs/tokio")[tokio]
+    支持
+  ],
+
+  link("https://github.com/tokio-rs/io-uring")[io-uring],
+  "linux io-uring 的 Rust 低级封装",
+
+  link("https://github.com/quininer/cbor4ii")[cbor4ii],
+  [#link("https://www.rfc-editor.org/rfc/rfc8949.html")[CBOR] 格式的 Rust 实现],
+
+  link("https://github.com/quininer/sftrace")[sftrace],
+  [基于 #link("https://llvm.org/docs/XRay.html")[LLVM Xray] 的函数跟踪工具],
+)

@@ -1,0 +1,14 @@
+#import "../tools.typst"
+#show: tools.post-web.with(
+  title: "Icebox",
+)
+
+= My Posts
+=
+
+- #link("/to-the-jatbun.html")[To The 日本]
+
+= And
+
+- #link("/resume.html")[About Me]
+- #link("/")[Previous Posts]
