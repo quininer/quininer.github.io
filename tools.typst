@@ -1,15 +1,4 @@
-#let make-header(links) = html.header(
-  if links != none {
-    html.nav(
-      for (href, title) in links {
-        html.a(href: href, title)
-      },
-    )
-  },
-)
-
 #let post-web(
-  header-links: none,
   title: "Icebox",
   lang: "zh",
   content,
@@ -27,8 +16,6 @@
       })
 
       html.body({
-        make-header(header-links)
-
         html.article(
           html.section(content),
         )

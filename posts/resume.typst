@@ -1,7 +1,5 @@
 #import "../tools.typst"
-#show: tools.post-web.with(
-  title: "Resume",
-)
+#show: tools.post-web.with(title: "Resume")
 #set text(
   font: (
     "Noto Serif",

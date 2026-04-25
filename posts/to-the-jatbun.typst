@@ -1,0 +1,393 @@
+#import "../tools.typst"
+#show: tools.post-web.with(title: "去日本")
+#set quote(block: true)
+
+#let img(path, desc: none, width: "100%") = figure(
+  html.elem("img", attrs: (
+    src: path,
+    width: width,
+    loading: "lazy",
+  )),
+  caption: desc,
+)
+
+= = 去日本
+--- _2026-04-25_
+=
+
+计划去日本这件事已经有许多年了，
+护照办好很久，但是一直拖着没去办签证。
+
+在 kiriri 老师的敦促下，二月顺利拿到签证，开始了第一次的去日本。
+
+因为在二月年后才开始计划旅程，所以酒店机票基本都没有太好的选择。
+东京内的酒店要么贵得离谱，要么就是集装箱。
+
+最终选择住到埼玉大宫附近，从酒店到东京景点基本上都在一小时左右，
+其实体验和北京搭地铁去市内景点也差不多。
+
+= 第零天
+
+== 出发
+
+去程比较顺利。注意出境海关排队人还是比较多的，登机时间不要卡得太死。
+
+#img("assets/ttj-day0-01.avif") 
+
+日本航空的飞机餐，在吃过的飞机餐里排得上号。
+还有一小时的机上 wifi 可以体验（网速稀烂）。
+
+顺便说一下日本上网的问题。
+
+国内的 Android 设备可以在 taobao 上买个 esim 白卡，
+配合 easyeuicc 或者
+#link("https://f-droid.org/zh_Hans/packages/chat.jmp.simmanager/")[JMP SIM Manager] (fdroid 版)
+即可使用 esim 。
+esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多。
+
+== 入境
+
+比起过中国的出境海关，日本的入境海关排队的人才是真的多，至少要排半个小时起步。
+
+这里踩了去日本的第一个坑 --- _现场注册和填写入境登记_
+
+基本上就是登记一下出入境时间、居住地、联系方式。
+因为不熟悉流程，至少又浪费了十几分钟。
+但是这其实可以在去之前就在 #link("https://www.vjw.digital.go.jp")[Visit Japan Web] 上提前准备好，
+不知道为什么几乎没有旅游攻略提及过这个。
+
+== 终电
+
+因为入境担搁了一会，所以觉得时间稍微有点紧张。
+
+又因为想要常规西瓜卡，而羽田机场里只卖限时有效的游客西瓜卡，
+所以决定先用现金购票。
+
+#img("assets/ttj-day0-02.avif")
+
+东急的购票非常原始，只能按票价购票。
+至于票价多少，要看旁边的牌子。
+
+搞清楚这个购票逻辑也花了一些时间...
+
+#img("assets/ttj-day0-03.avif")
+
+此时踩到了去日本的第二个坑 --- _品川方面站台 != 到品川_
+
+到站台的时候刚好要发车，匆忙确认了站台上写着“品川方面”就上了车。
+
+而日本老式一点的电车，车内的路线图不会标出当前车次行驶的路线，
+所以上车之后无法确认自己上的车会去往哪里。
+...当然也可能是我没看懂。
+
+#img("assets/ttj-day0-04.avif")
+
+直到车辆从京急蒲田出来，驶向京急川崎的时候才确认上错了车。匆匆忙忙下车回头。
+
+#quote[
+  此处特别感谢彼得老师的指导！
+
+  彼得老师解释说，
+  京急线从羽田出来的车辆都会经过京急蒲田然后再驶向不同方向，
+  所以其实所有车辆都是从同一个站台出发。
+]
+
+这是日本搭电车和国内搭地铁很不一样的地方，
+要注意看车头或者时刻表来确认自己上的是哪一班次的车辆。
+
+虽然一路紧张刺激，怕着要赶末班车，但是其实时间还是有富余的。
+
+= 第一天
+
+大约两年前开始，我就有点执着于要和朋友们见一面，即使可能一辈子只见一面。
+
+这也是这次去日本的最大动力。
+
+== 浅草寺、浅草神社
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day1-01.avif"),
+  img("assets/ttj-day1-04.avif"),
+  img("assets/ttj-day1-02.avif"),
+  img("assets/ttj-day1-03.avif"),
+)
+
+浅草寺不是很大，和国内的寺庙差不多。
+但是有许多漂亮的造景，尤其是樱花季，值得一行。
+
+运气不错的抽中了九十九大吉。
+
+#img("assets/ttj-day1-05.avif", desc: "鸡肉x牛肉 拉面")
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day1-06.avif"),
+  img("assets/ttj-day1-07.avif"),
+)
+
+和 fc 老师在浅草寺附近吃了去日本的第一餐拉面，味道相当好。
+
+还和 fc 老师女儿深切交流了一下 ptcg pocket 抽卡）
+
+== 天空树
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day1-08.avif"),
+  img("assets/ttj-day1-09.avif"),
+  img("assets/ttj-day1-10.avif"),
+  img("assets/ttj-day1-11.avif"),
+)
+
+本来想着直奔晴空塔，但是由于没有预约，只能现场购买五点半进场的票。
+
+逛了一下塔边的墨田水族馆和宝中心。
+水族馆非常小，除非是为了打卡二次元，否则不推荐...
+
+塔边还有个卡比咖啡厅，但是是预约制，看了一眼整个月已经全部约满了，遂放弃。
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day1-12.avif"),
+  img("assets/ttj-day1-15.avif"),
+  img("assets/ttj-day1-13.avif"),
+  img("assets/ttj-day1-14.avif"),
+)
+
+可能是游客季的原因，上塔排队的队伍非常长，比入境海关的队伍还要长。
+
+从五点半排到到六点半，终于搭电梯上到塔上。
+然后发现塔上每个设施也都要排队，甚至从塔上下来也要排队...
+
+不过夜景还是非常漂亮的，虽然一开始根本没打算看夜景... 也算是焉知非福吧。
+
+#img("assets/ttj-day1-16.avif")
+
+回到酒店发现，带在身上的 3ds 擦肩到不少人，不愧是日本呀。
+
+= 第二天
+
+来之前是打算去半天池袋再去半天涩谷，
+但是碰到了池袋的杀人事件导致宝中心休业，只好在涩谷转悠一整天。
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day2-01.avif", desc: "任天堂商店"),
+  img("assets/ttj-day2-02.avif", desc: "宝可梦中心"),
+)
+
+#img("assets/ttj-day2-03.avif", desc: "第二餐拉面")
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day2-04.avif"),
+  img("assets/ttj-day2-05.avif"),
+)
+
+在电影院补票超时空辉夜姬，一句日语都听不懂，但是看哭了 🥲。
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day2-06.avif"),
+  img("assets/ttj-day2-07.avif"),
+)
+
+到处转悠。理光 GR3X 根本没货，饥饿营销罪大恶极。
+
+#img("assets/ttj-day2-08.avif", desc: "日本火锅？")
+
+和 kiriri 老师及其同事们的聚餐。
+
+= 第三天
+
+横滨一天。
+
+#img("assets/ttj-day3-03.avif")
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day3-02.avif"),
+  img("assets/ttj-day3-04.avif"),
+)
+
+樱花河道，美不胜收。
+可惜手机摄像头太差了，强烈的促使我要在日本买个相机。
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day3-05.avif"),
+  img("assets/ttj-day3-01.avif"),
+)
+
+午餐的汉堡，味道不错。
+付款的时候发现不支持微信和支付宝，
+然后又一时忘记了可以现金付款，匆匆忙忙有点尴尬...
+
+#img("assets/ttj-day3-08.avif")
+
+之前有朋友说他喜欢方方正正的车，大概是这种感觉吧？
+
+#img("assets/ttj-day3-06.avif")
+
+音乐节，结束乐队的场。灯光酷炫，氛围热烈，可惜不允许拍照...
+
+#img("assets/ttj-day3-07.avif")
+
+和朋友们的烤肉自助，吃得最爽的一餐。
+
+= 第四天
+
+从横滨回来继续逛东京。
+
+== 神田神社
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day4-01.avif"),
+  img("assets/ttj-day4-02.avif"),
+  img("assets/ttj-day4-03.avif"),
+  img("assets/ttj-day4-04.avif"),
+)
+
+神田神社，大神社裏面有許多小神社，很有意思。
+
+== 东京博物馆
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day4-05.avif"),
+  img("assets/ttj-day4-08.avif"),
+  img("assets/ttj-day4-06.avif"),
+  img("assets/ttj-day4-07.avif"),
+)
+
+东京国立博物馆，不能说小，但是远不如北京国家博物馆大。
+
+展品还是非常丰富的。
+
+#img("assets/ttj-day4-09.avif")
+
+非常喜欢的一点是有很多坐的地方，甚至有沙发，逛累了可以躺下休息。
+日本人真的会享受，建议国内的博物馆美术馆跟进。
+
+== 上野
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day4-10.avif", desc: "一边吃可丽饼一边赏樱"),
+  img("assets/ttj-day4-11.avif", desc: "偶遇演出"),
+  img("assets/ttj-day4-12.avif", desc: "很有感觉的神社"),
+  img("assets/ttj-day4-13.avif", desc: "湖边夕阳"),
+)
+
+出博物馆刚好是上野樱花祭，一路各种摊位和演出。
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day4-15.avif", desc: "理光 GR 是不可能有货的"),
+  img("assets/ttj-day4-16.avif", desc: "初遇 E-P7"),
+  img("assets/ttj-day4-17.avif", desc: "富士相纸是不可能有货的"),
+  img("assets/ttj-day4-14.avif", desc: "登山少女，漫画一般动画神作"),
+)
+
+最后路过了一下秋叶原，晚上的秋叶原全是会叫你小哥哥的美少女，非常吓人。
+
+= 第五天
+
+== 明治神宫
+
+#img("assets/ttj-day5-01.avif", desc: "路过日共")
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day5-02.avif", desc: "明治神宫"),
+  img("assets/ttj-day5-03.avif", desc: "偶遇巫女s"),
+  img("assets/ttj-day5-04.avif"),
+  img("assets/ttj-day5-05.avif"),
+)
+
+建在森林里的大神社，除此之外好像没有什么特别的。
+
+== 御园
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day5-06.avif"),
+  img("assets/ttj-day5-07.avif"),
+  img("assets/ttj-day5-08.avif"),
+  img("assets/ttj-day5-09.avif"),
+)
+
+全是樱花的大公园，遍地是樱花花瓣，起风的时候可以见到樱吹雪。
+
+许多人在樱花树下野餐，感觉有带野餐垫在这里午睡一下会很惬意。
+
+== 新宿、歌舞伎町
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day5-10.avif"),
+  img("assets/ttj-day5-11.avif"),
+)
+
+RX1RM3 虽然很好，但是价格和厚度还是望而却步。
+最终决定把 E-P7 带回家。
+
+不过因为没买 sd 卡，所以 E-P7 不能马上用。
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day5-12.avif"),
+  img("assets/ttj-day5-13.avif"),
+)
+
+歌舞伎町偶遇地偶演出，气氛很好，很多人打 call。
+第一次看地偶表演果然是在日本了。
+
+最后歌舞伎町的美少女比秋叶原还多。
+成群的美少女在一条路上排成两排，如果从中间走过会有很大压力...
+
+= 第六天
+
+最后两天原本计划应该见一位朋友，可惜最后时间没安排上。
+
+然后考虑难得住在大宫附近，不去一趟大宫铁道博物馆实在说不过去。
+
+#table(
+  columns: (auto, auto),
+  img("assets/ttj-day6-01.avif", desc: "好多火车！"),
+  img("assets/ttj-day6-02.avif", desc: "想着吃一餐蛋包饭吧"),
+  img("assets/ttj-day6-03.avif", desc: "几乎都是中文"),
+  img("assets/ttj-day6-04.avif", desc: "如果是左边的科技领先了，我们的课本会不会是这种形式呢？"),
+  img("assets/ttj-day6-08.avif", desc: "在车厢里休息，甚至开着空调"),
+  img("assets/ttj-day6-06.avif", desc: "小火车"),
+  img("assets/ttj-day6-05.avif"),
+  img("assets/ttj-day6-07.avif"),
+)
+
+大宫铁博内容很充实，从历史介绍到能触摸的实物，预约还能开小火车。
+以及很多面向儿童的教育和游玩内容，适合带小朋友去。
+
+最好的一点是大部分开放车厢都可以进去坐，不怕找不到地方休息）
+
+= 最后
+
+第一次去日本至此告一段落。
+
+东京真的是非常成熟的旅游城市，完全不会日语也能玩得很开心。
+凭着指手画脚和翻译工具，粗略的交流不是问题。
+
+日本的服务业也非常友善。
+印象很深的是出入境海关的时候，工作人员指引游客走面部识别快速通道，
+当识别成功的时候他们简直想跳起来为你鼓掌的样子。
+
+== 现在
+
+从有去日本旅行的念头到今天，至少也有五六年，却一直没有迈出脚步。
+
+许多事情应该在更青春的时候去做，但当时总觉得自己还年轻。
+
+无论如何，如果十年前没有种树，那即使迟了，最好的时机也是现在。
+
+...
