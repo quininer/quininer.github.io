@@ -1,0 +1,117 @@
+#import "../tools.typst"
+#show: tools.post-web.with(title: "Olympus E-P7 and OM-System PEN")
+#set quote(block: true)
+
+#let img(path, desc: none, width: "100%") = figure(
+  html.elem("img", attrs: (
+    src: path,
+    width: width,
+    loading: "lazy",
+  )),
+  caption: desc,
+)
+
+= = Olympus E-P7 and OM-System PEN
+--- _2026-10-09_
+=
+
+今年四月入手 E-P7 最重要的条件是能随时携带在身，
+配合 M43 的便宜实惠又小巧的镜头，陆续也拍了不少照片。
+
+但是考虑隐私和肖像权等问题，有许多自己觉得不错的照片不会在这里放出。
+
+所有照片都是直出。
+
+== E-P7
+
+#table(
+  columns: (auto, auto),
+  img("assets/pen/ep7-0.avif", desc: "圆明园"),
+  img("assets/pen/ep7-1.avif", desc: "圆明园的喜鹊"),
+  img("assets/pen/ep7-2.avif", desc: "随手拍"),
+  img("assets/pen/ep7-3.avif", desc: "Pokemon 花径漫游"),
+  img("assets/pen/ep7-4.avif", desc: "逗猫猫"),
+  img("assets/pen/ep7-5.avif", desc: "越王剑"),
+)
+
+既然买了相机，就多出点门吧
+
+#table(
+  columns: (auto, auto),
+  img("assets/pen/ep7-6.avif"),
+  img("assets/pen/ep7-7.avif"),
+  img("assets/pen/ep7-8.avif"),
+  img("assets/pen/ep7-9.avif"),
+  img("assets/pen/ep7-10.avif"),
+  img("assets/pen/ep7-11.avif"),
+)
+
+草系
+
+#table(
+  columns: (auto, auto),
+  img("assets/pen/ep7-12.avif", desc: "不太聪明的样子"),
+  img("assets/pen/ep7-13.avif", desc: "40-150mm"),
+)
+
+一般系、飞行系
+
+#table(
+  columns: (auto, auto),
+  img("assets/pen/ep7-14.avif"),
+  img("assets/pen/ep7-15.avif"),
+  img("assets/pen/ep7-16.avif"),
+  img("assets/pen/ep7-17.avif"),
+)
+
+== PEN
+
+E-P7 是最小和便宜的五轴防抖微单，
+但奥林巴斯或者说现在的奥之心是个迂腐的老日本企业，
+不舍得给旧机型更新 UI、不舍得给入门机型下放软件功能。
+
+用了小半年 E-P7，对奥之心的计算摄影兴趣渐增。
+而新发售的 OM PEN 基本上是 E-P7 的造型，更新了 OM5 的内核。
+是一个很好的升级机型。
+
+但是很可惜的是 OM PEN 的体积比 E-P7 增加了 30%，相比其他机型再无体积优势。
+前一段时间发售的松下 L10 也差不多是这个体积，
+我猜测这可能是经研究过的便携机器体积极限。
+
+经过一段时间的使用，确也如此。
+
+#table(
+  columns: (auto, auto),
+  img("assets/pen/pen-0.avif", desc: "中秋摄月"),
+  img("assets/pen/pen-1.avif", desc: "12-45mm PRO"),
+)
+
+OM PEN 的随手拍
+
+#table(
+  columns: (auto, auto),
+  img("assets/pen/pen-2.avif", desc: "水上的士"),
+  img("assets/pen/pen-3.avif", desc: "Live ND 慢门"),
+  img("assets/pen/pen-4.avif", desc: "猫：瞪眼（防御下降⬇️）"),
+)
+
+我很喜欢这个内置 ND 镜功能，在白天拍慢门相当有趣
+
+#table(
+  columns: (auto, auto),
+  img("assets/pen/pen-5.avif"),
+  img("assets/pen/pen-6.avif"),
+)
+
+天星小轮所摄
+
+#table(
+  columns: (auto, auto),
+  img("assets/pen/pen-7.avif"),
+  img("assets/pen/pen-8.avif"),
+  img("assets/pen/pen-9.avif"),
+  img("assets/pen/pen-10.avif"),
+  img("assets/pen/pen-11.avif"),
+)
+
+#img("assets/pen/pen-12.avif")

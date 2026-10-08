@@ -32,7 +32,7 @@
 
 去程比较顺利。注意出境海关排队人还是比较多的，登机时间不要卡得太死。
 
-#img("assets/ttj-day0-01.avif") 
+#img("assets/ttj/ttj-day0-01.avif") 
 
 日本航空的飞机餐，在吃过的飞机餐里排得上号。
 还有一小时的机上 wifi 可以体验（网速稀烂）。
@@ -66,8 +66,8 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day0-02.avif", desc: "东急的购票很原始，只能按票价购票"),
-  img("assets/ttj-day0-03.avif", desc: "至于票价，要看旁边的牌子"),  
+  img("assets/ttj/ttj-day0-02.avif", desc: "东急的购票很原始，只能按票价购票"),
+  img("assets/ttj/ttj-day0-03.avif", desc: "至于票价，要看旁边的牌子"),  
 )
 
 此时踩到了去日本的第二个坑 --- _品川方面站台 != 到品川_
@@ -78,7 +78,7 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 所以上车之后无法确认自己上的车会去往哪里。
 ...当然也可能是我没看懂。
 
-#img("assets/ttj-day0-04.avif")
+#img("assets/ttj/ttj-day0-04.avif")
 
 直到车辆从京急蒲田出来，驶向京急川崎的时候才确认上错了车。匆匆忙忙下车回头。
 
@@ -105,10 +105,10 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day1-01.avif"),
-  img("assets/ttj-day1-04.avif"),
-  img("assets/ttj-day1-02.avif"),
-  img("assets/ttj-day1-03.avif"),
+  img("assets/ttj/ttj-day1-01.avif"),
+  img("assets/ttj/ttj-day1-04.avif"),
+  img("assets/ttj/ttj-day1-02.avif"),
+  img("assets/ttj/ttj-day1-03.avif"),
 )
 
 浅草寺不是很大，和国内的寺庙差不多。
@@ -116,12 +116,12 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 运气不错的抽中了九十九大吉。
 
-#img("assets/ttj-day1-05.avif", desc: "鸡肉x牛肉 拉面")
+#img("assets/ttj/ttj-day1-05.avif", desc: "鸡肉x牛肉 拉面")
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day1-06.avif"),
-  img("assets/ttj-day1-07.avif"),
+  img("assets/ttj/ttj-day1-06.avif"),
+  img("assets/ttj/ttj-day1-07.avif"),
 )
 
 和 fc 老师在浅草寺附近吃了去日本的第一餐拉面，味道相当好。
@@ -132,10 +132,10 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day1-08.avif"),
-  img("assets/ttj-day1-09.avif"),
-  img("assets/ttj-day1-10.avif"),
-  img("assets/ttj-day1-11.avif"),
+  img("assets/ttj/ttj-day1-08.avif"),
+  img("assets/ttj/ttj-day1-09.avif"),
+  img("assets/ttj/ttj-day1-10.avif"),
+  img("assets/ttj/ttj-day1-11.avif"),
 )
 
 本来想着直奔晴空塔，但是由于没有预约，只能现场购买五点半进场的票。
@@ -147,10 +147,10 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day1-12.avif"),
-  img("assets/ttj-day1-15.avif"),
-  img("assets/ttj-day1-13.avif"),
-  img("assets/ttj-day1-14.avif"),
+  img("assets/ttj/ttj-day1-12.avif"),
+  img("assets/ttj/ttj-day1-15.avif"),
+  img("assets/ttj/ttj-day1-13.avif"),
+  img("assets/ttj/ttj-day1-14.avif"),
 )
 
 可能是游客季的原因，上塔排队的队伍非常长，比入境海关的队伍还要长。
@@ -160,7 +160,7 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 不过夜景还是非常漂亮的，虽然一开始根本没打算看夜景... 也算是焉知非福吧。
 
-#img("assets/ttj-day1-16.avif")
+#img("assets/ttj/ttj-day1-16.avif")
 
 回到酒店发现，带在身上的 3ds 擦肩到不少人，不愧是日本呀。
 
@@ -171,29 +171,29 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day2-01.avif", desc: "任天堂商店"),
-  img("assets/ttj-day2-02.avif", desc: "宝可梦中心"),
+  img("assets/ttj/ttj-day2-01.avif", desc: "任天堂商店"),
+  img("assets/ttj/ttj-day2-02.avif", desc: "宝可梦中心"),
 )
 
-#img("assets/ttj-day2-03.avif", desc: "第二餐拉面")
+#img("assets/ttj/ttj-day2-03.avif", desc: "第二餐拉面")
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day2-04.avif"),
-  img("assets/ttj-day2-05.avif"),
+  img("assets/ttj/ttj-day2-04.avif"),
+  img("assets/ttj/ttj-day2-05.avif"),
 )
 
 在电影院补票超时空辉夜姬，一句日语都听不懂，但是看哭了 🥲。
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day2-06.avif"),
-  img("assets/ttj-day2-07.avif"),
+  img("assets/ttj/ttj-day2-06.avif"),
+  img("assets/ttj/ttj-day2-07.avif"),
 )
 
 到处转悠。理光 GR3X 根本没货，饥饿营销罪大恶极。
 
-#img("assets/ttj-day2-08.avif", desc: "日本火锅？")
+#img("assets/ttj/ttj-day2-08.avif", desc: "日本火锅？")
 
 和 kiriri 老师及其同事们的聚餐。
 
@@ -201,12 +201,12 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 横滨一天。
 
-#img("assets/ttj-day3-03.avif")
+#img("assets/ttj/ttj-day3-03.avif")
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day3-02.avif"),
-  img("assets/ttj-day3-04.avif"),
+  img("assets/ttj/ttj-day3-02.avif"),
+  img("assets/ttj/ttj-day3-04.avif"),
 )
 
 樱花河道，美不胜收。
@@ -214,23 +214,23 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day3-05.avif"),
-  img("assets/ttj-day3-01.avif"),
+  img("assets/ttj/ttj-day3-05.avif"),
+  img("assets/ttj/ttj-day3-01.avif"),
 )
 
 午餐的汉堡，味道不错。
 付款的时候发现不支持微信和支付宝，
 然后又一时忘记了可以现金付款，匆匆忙忙有点尴尬...
 
-#img("assets/ttj-day3-08.avif")
+#img("assets/ttj/ttj-day3-08.avif")
 
 之前有朋友说他喜欢方方正正的车，大概是这种感觉吧？
 
-#img("assets/ttj-day3-06.avif")
+#img("assets/ttj/ttj-day3-06.avif")
 
 音乐节，结束乐队的场。灯光酷炫，氛围热烈，可惜不允许拍照...
 
-#img("assets/ttj-day3-07.avif")
+#img("assets/ttj/ttj-day3-07.avif")
 
 和朋友们的烤肉自助，吃得最爽的一餐。
 
@@ -242,10 +242,10 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day4-01.avif"),
-  img("assets/ttj-day4-02.avif"),
-  img("assets/ttj-day4-03.avif"),
-  img("assets/ttj-day4-04.avif"),
+  img("assets/ttj/ttj-day4-01.avif"),
+  img("assets/ttj/ttj-day4-02.avif"),
+  img("assets/ttj/ttj-day4-03.avif"),
+  img("assets/ttj/ttj-day4-04.avif"),
 )
 
 神田神社，大神社裏面有許多小神社，很有意思。
@@ -254,17 +254,17 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day4-05.avif"),
-  img("assets/ttj-day4-08.avif"),
-  img("assets/ttj-day4-06.avif"),
-  img("assets/ttj-day4-07.avif"),
+  img("assets/ttj/ttj-day4-05.avif"),
+  img("assets/ttj/ttj-day4-08.avif"),
+  img("assets/ttj/ttj-day4-06.avif"),
+  img("assets/ttj/ttj-day4-07.avif"),
 )
 
 东京国立博物馆，不能说小，但是远不如北京国家博物馆大。
 
 展品还是非常丰富的。
 
-#img("assets/ttj-day4-09.avif")
+#img("assets/ttj/ttj-day4-09.avif")
 
 非常喜欢的一点是有很多坐的地方，甚至有沙发，逛累了可以躺下休息。
 日本人真的会享受，建议国内的博物馆美术馆跟进。
@@ -273,20 +273,20 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day4-10.avif", desc: "一边吃可丽饼一边赏樱"),
-  img("assets/ttj-day4-11.avif", desc: "偶遇演出"),
-  img("assets/ttj-day4-12.avif", desc: "很有感觉的神社"),
-  img("assets/ttj-day4-13.avif", desc: "湖边夕阳"),
+  img("assets/ttj/ttj-day4-10.avif", desc: "一边吃可丽饼一边赏樱"),
+  img("assets/ttj/ttj-day4-11.avif", desc: "偶遇演出"),
+  img("assets/ttj/ttj-day4-12.avif", desc: "很有感觉的神社"),
+  img("assets/ttj/ttj-day4-13.avif", desc: "湖边夕阳"),
 )
 
 出博物馆刚好是上野樱花祭，一路各种摊位和演出。
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day4-15.avif", desc: "理光 GR 是不可能有货的"),
-  img("assets/ttj-day4-16.avif", desc: "初遇 E-P7"),
-  img("assets/ttj-day4-17.avif", desc: "富士相纸是不可能有货的"),
-  img("assets/ttj-day4-14.avif", desc: "登山少女，漫画一般动画神作"),
+  img("assets/ttj/ttj-day4-15.avif", desc: "理光 GR 是不可能有货的"),
+  img("assets/ttj/ttj-day4-16.avif", desc: "初遇 E-P7"),
+  img("assets/ttj/ttj-day4-17.avif", desc: "富士相纸是不可能有货的"),
+  img("assets/ttj/ttj-day4-14.avif", desc: "登山少女，漫画一般动画神作"),
 )
 
 最后路过了一下秋叶原，晚上的秋叶原全是会叫你小哥哥的美少女，非常吓人。
@@ -295,14 +295,14 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 == 明治神宫
 
-#img("assets/ttj-day5-01.avif", desc: "路过日共")
+#img("assets/ttj/ttj-day5-01.avif", desc: "路过日共")
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day5-02.avif", desc: "明治神宫"),
-  img("assets/ttj-day5-03.avif", desc: "偶遇巫女s"),
-  img("assets/ttj-day5-04.avif"),
-  img("assets/ttj-day5-05.avif"),
+  img("assets/ttj/ttj-day5-02.avif", desc: "明治神宫"),
+  img("assets/ttj/ttj-day5-03.avif", desc: "偶遇巫女s"),
+  img("assets/ttj/ttj-day5-04.avif"),
+  img("assets/ttj/ttj-day5-05.avif"),
 )
 
 建在森林里的大神社，除此之外好像没有什么特别的。
@@ -311,10 +311,10 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day5-06.avif"),
-  img("assets/ttj-day5-07.avif"),
-  img("assets/ttj-day5-08.avif"),
-  img("assets/ttj-day5-09.avif"),
+  img("assets/ttj/ttj-day5-06.avif"),
+  img("assets/ttj/ttj-day5-07.avif"),
+  img("assets/ttj/ttj-day5-08.avif"),
+  img("assets/ttj/ttj-day5-09.avif"),
 )
 
 全是樱花的大公园，遍地是樱花花瓣，起风的时候可以见到樱吹雪。
@@ -325,8 +325,8 @@ esim 流量卡套餐挑便宜的买，大部分是 3hk 转售，都差不太多�
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day5-10.avif"),
-  img("assets/ttj-day5-11.avif"),
+  img("assets/ttj/ttj-day5-10.avif"),
+  img("assets/ttj/ttj-day5-11.avif"),
 )
 
 RX1RM3 虽然很好，但是价格和厚度还是望而却步。
@@ -336,8 +336,8 @@ RX1RM3 虽然很好，但是价格和厚度还是望而却步。
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day5-12.avif"),
-  img("assets/ttj-day5-13.avif"),
+  img("assets/ttj/ttj-day5-12.avif"),
+  img("assets/ttj/ttj-day5-13.avif"),
 )
 
 歌舞伎町偶遇地偶演出，气氛很好，很多人打 call。
@@ -354,14 +354,14 @@ RX1RM3 虽然很好，但是价格和厚度还是望而却步。
 
 #table(
   columns: (auto, auto),
-  img("assets/ttj-day6-01.avif", desc: "好多火车！"),
-  img("assets/ttj-day6-02.avif", desc: "想着吃一餐蛋包饭吧"),
-  img("assets/ttj-day6-03.avif", desc: "几乎都是中文"),
-  img("assets/ttj-day6-04.avif", desc: "如果是左边的科技领先了，我们的课本会不会是这种形式呢？"),
-  img("assets/ttj-day6-08.avif", desc: "在车厢里休息，甚至开着空调"),
-  img("assets/ttj-day6-06.avif", desc: "小火车"),
-  img("assets/ttj-day6-05.avif"),
-  img("assets/ttj-day6-07.avif"),
+  img("assets/ttj/ttj-day6-01.avif", desc: "好多火车！"),
+  img("assets/ttj/ttj-day6-02.avif", desc: "想着吃一餐蛋包饭吧"),
+  img("assets/ttj/ttj-day6-03.avif", desc: "几乎都是中文"),
+  img("assets/ttj/ttj-day6-04.avif", desc: "如果是左边的科技领先了，我们的课本会不会是这种形式呢？"),
+  img("assets/ttj/ttj-day6-08.avif", desc: "在车厢里休息，甚至开着空调"),
+  img("assets/ttj/ttj-day6-06.avif", desc: "小火车"),
+  img("assets/ttj/ttj-day6-05.avif"),
+  img("assets/ttj/ttj-day6-07.avif"),
 )
 
 大宫铁博内容很充实，从历史介绍到能触摸的实物，预约还能开小火车。
